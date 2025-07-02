@@ -128,11 +128,12 @@ const InstructionsTitle = styled.h3`
   margin: 0;
 `;
 
-const ToggleIcon = styled.span`
-  font-size: 20px;
-  color: #6b7280;
+const ToggleIcon = styled.img`
+  width: 20px;
+  height: 20px;
   transition: transform 0.2s ease;
   transform: ${props => props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
+  filter: brightness(0) saturate(100%) invert(47%) sepia(8%) saturate(1234%) hue-rotate(202deg) brightness(91%) contrast(86%);
 `;
 
 const InstructionsTextarea = styled.textarea`
@@ -234,7 +235,11 @@ const Basket = ({
               <SpecialInstructionsContainer>
                 <InstructionsHeader onClick={handleToggleInstructions}>
                   <InstructionsTitle>Special Instructions</InstructionsTitle>
-                  <ToggleIcon isOpen={isInstructionsOpen}>▼</ToggleIcon>
+                  <ToggleIcon 
+                    isOpen={isInstructionsOpen} 
+                    src="/src/assets/icons/chevron_big_down.svg" 
+                    alt="Toggle instructions"
+                  />
                 </InstructionsHeader>
                 
                 {isInstructionsOpen && (

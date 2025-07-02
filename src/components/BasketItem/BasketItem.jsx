@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
+
 
 const ItemContainer = styled.div`
   display: flex;
@@ -16,8 +18,8 @@ const ItemContainer = styled.div`
 `;
 
 const ItemImage = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 64px;
+  height: 64px;
   background-color: #f3f4f6;
   border-radius: 8px;
   display: flex;
@@ -25,11 +27,12 @@ const ItemImage = styled.div`
   justify-content: center;
   font-size: 24px;
   flex-shrink: 0;
+  overflow: hidden;
   
-  @media (min-width: 768px) {
-    width: 80px;
-    height: 80px;
-    font-size: 32px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `;
 
@@ -129,14 +132,58 @@ const ActionButton = styled.button`
 `;
 
 const DeleteButton = styled(ActionButton)`
-  color: #ef4444;
-  border-color: #fecaca;
+  color: grey;
+  border: none;
+  background-color: #F3F5F5;
+  padding: 8px;
   
   &:hover:not(:disabled) {
     background-color: #ef4444;
     border-color: #ef4444;
     color: white;
   }
+  
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+`;
+
+const SpecialInstructionsContainer = styled.div`
+  padding: 12px;
+  border-top: 1px solid #e5e7eb;
+  background-color: #F3F5F5;
+  border-radius: 8px;
+`;
+
+const InstructionsHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 8px 0;
+`;
+
+const InstructionsTitle = styled.span`
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
+`;
+
+const ChevronIcon = styled.img`
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+  transform: ${props => props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
+  filter: brightness(0) saturate(100%) invert(47%) sepia(8%) saturate(1234%) hue-rotate(202deg) brightness(91%) contrast(86%);
+`;
+
+const InstructionsContent = styled.div`
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.4;
+  padding: 8px 0;
 `;
 
 const BasketItem = ({ 
@@ -145,6 +192,8 @@ const BasketItem = ({
   onRemove,
   ...props 
 }) => {
+  const [isInstructionsOpen, setIsInstructionsOpen] = useState(false);
+
   const handleIncrement = () => {
     if (onQuantityChange) {
       onQuantityChange(item.id, item.quantity + 1);
@@ -163,7 +212,14 @@ const BasketItem = ({
     }
   };
 
+  const handleToggleInstructions = () => {
+    setIsInstructionsOpen(!isInstructionsOpen);
+  };
+
   const totalPrice = item.price * item.quantity;
+  
+  // Check if item has special instructions
+  const hasSpecialInstructions = item.customization || item.glutenFree || item.specialInstructions;
 
   return (
     <ItemContainer {...props}>
@@ -177,13 +233,32 @@ const BasketItem = ({
       
       <ItemContent>
         <ItemName>{item.name}</ItemName>
-        {item.customization && (
-          <ItemCustomization>{item.customization}</ItemCustomization>
-        )}
-        {item.glutenFree && (
-          <ItemCustomization>🌾 Gluten Free</ItemCustomization>
-        )}
         <ItemPrice>${totalPrice.toFixed(2)}</ItemPrice>
+        
+        {hasSpecialInstructions && (
+          <SpecialInstructionsContainer>
+            <InstructionsHeader onClick={handleToggleInstructions}>
+              <InstructionsTitle>Special Instructions</InstructionsTitle>
+              <ChevronIcon 
+                isOpen={isInstructionsOpen} 
+                src="/src/assets/icons/chevron_big_down.svg" 
+                alt="Toggle instructions"
+              />
+            </InstructionsHeader>
+            
+            {isInstructionsOpen && (
+              <InstructionsContent>
+                {item.customization && (
+                  <div>Customization: {item.customization}</div>
+                )}
+               
+                {item.specialInstructions && (
+                  <div>{item.specialInstructions}</div>
+                )}
+              </InstructionsContent>
+            )}
+          </SpecialInstructionsContainer>
+        )}
       </ItemContent>
       
       <ItemActions>
@@ -210,7 +285,9 @@ const BasketItem = ({
           onClick={handleRemove}
           aria-label="Remove item"
         >
-          🗑️
+          <svg viewBox="0 0 24 24">
+            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+          </svg>
         </DeleteButton>
       </ItemActions>
     </ItemContainer>
@@ -227,6 +304,7 @@ BasketItem.propTypes = {
     emoji: PropTypes.string,
     customization: PropTypes.string,
     glutenFree: PropTypes.bool,
+    specialInstructions: PropTypes.string,
   }).isRequired,
   onQuantityChange: PropTypes.func,
   onRemove: PropTypes.func,

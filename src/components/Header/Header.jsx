@@ -210,14 +210,22 @@ const IconButton = styled.button`
   }
 `;
 
-const NotificationDot = styled.div`
+const NotificationBadge = styled.div`
   position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 8px;
-  height: 8px;
+  top: -4px;
+  right: -4px;
+  min-width: 20px;
+  height: 20px;
   background-color: #EC575C;
-  border-radius: 50%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  border: 2px solid white;
 `;
 
 const MobileSearchButton = styled.button`
@@ -396,7 +404,7 @@ const Header = ({ basketCount = 0, onBasketClick, onLogoClick, onSearch }) => {
             <IconButton onClick={onBasketClick} tabIndex={0} aria-label="View basket">
               <img src={shoppingBagIcon} alt="Shopping Bag" />
               {basketCount > 0 && (
-                <NotificationDot>{basketCount}</NotificationDot>
+                <NotificationBadge>{basketCount}</NotificationBadge>
               )}
             </IconButton>
             

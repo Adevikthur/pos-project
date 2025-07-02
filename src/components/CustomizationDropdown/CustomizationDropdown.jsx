@@ -39,10 +39,12 @@ const SelectedText = styled.span`
   color: ${props => props.hasSelection ? '#111827' : '#9ca3af'};
 `;
 
-const Arrow = styled.span`
-  font-size: 12px;
+const Arrow = styled.img`
+  width: 12px;
+  height: 12px;
   transition: transform 0.2s ease;
   transform: ${props => props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
+  filter: brightness(0) saturate(100%) invert(47%) sepia(8%) saturate(1234%) hue-rotate(202deg) brightness(91%) contrast(86%);
 `;
 
 const Dropdown = styled.div`
@@ -153,7 +155,11 @@ const CustomizationDropdown = ({
         <SelectedText hasSelection={!!selectedOption}>
           {selectedText}
         </SelectedText>
-        <Arrow isOpen={isOpen}>▼</Arrow>
+        <Arrow 
+          isOpen={isOpen} 
+          src="/src/assets/icons/chevron_big_down.svg" 
+          alt="Toggle dropdown"
+        />
       </SelectButton>
       
       <Dropdown isOpen={isOpen} role="listbox">

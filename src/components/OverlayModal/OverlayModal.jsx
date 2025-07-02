@@ -8,13 +8,14 @@ const Overlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   padding: 20px;
+  max-width: 100%;
   
   @media (min-width: 768px) {
     padding: 40px;
@@ -24,10 +25,12 @@ const Overlay = styled.div`
 const ModalContent = styled.div`
   background-color: white;
   border-radius: 12px;
-  max-width: 500px;
+  max-width: 600px;
+  border-radius: 16px;
   width: 100%;
   max-height: 90vh;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   position: relative;
   animation: slideIn 0.3s ease;
   
@@ -79,7 +82,7 @@ const CloseButton = styled.button`
 `;
 
 const ModalScrollContainer = styled.div`
-  max-height: 90vh;
+  flex: 1;
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -89,28 +92,27 @@ const ModalScrollContainer = styled.div`
   }
 `;
 
-const ModalHeader = styled.div`
-  padding: 24px 24px 0 24px;
-`;
-
-const FoodImage = styled.div`
+const FoodImageContainer = styled.div`
   width: 100%;
-  height: 200px;
+  height: 240px;
   background-color: #f3f4f6;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 64px;
-  margin-bottom: 16px;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  position: relative;
   
-  @media (min-width: 768px) {
-    height: 180px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `;
 
+const FoodInfoContainer = styled.div`
+  padding: 24px;
+`;
+
 const FoodTitle = styled.h2`
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 600;
   color: #111827;
   margin: 0 0 8px 0;
@@ -124,49 +126,56 @@ const FoodDescription = styled.p`
 `;
 
 const FoodPrice = styled.div`
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
   color: #EC575C;
   margin-bottom: 24px;
 `;
 
-const ModalBody = styled.div`
-  padding: 0 24px 24px 24px;
+const AddToBasketContainer = styled.div`
+  padding: 12px 120px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e5e7eb;
+  background-color: white;
+  border-radius: 0 0 12px 12px;
 `;
 
-const Section = styled.div`
-  margin-bottom: 24px;
-`;
-
-const SectionTitle = styled.h3`
+const AddToBasketButton = styled.button`
+  width: 100%;
+  padding: 16px 24px;
+  background-color: #EC575C;
+  color: white;
+  border: none;
+  border-radius: 8px;
   font-size: 18px;
   font-weight: 600;
-  color: #111827;
-  margin: 0 0 12px 0;
-`;
-
-const CheckboxContainer = styled.label`
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  padding: 12px 0;
+  justify-content: space-between;
+  transition: background-color 0.2s ease;
   
   &:hover {
-    color: #EC575C;
+    background-color: #d1454a;
+  }
+  
+  &:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
   }
 `;
 
-const Checkbox = styled.input`
-  width: 20px;
-  height: 20px;
-  accent-color: #EC575C;
-  cursor: pointer;
+const ButtonLeft = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `;
 
-const CheckboxText = styled.span`
-  font-size: 16px;
-  color: #374151;
+const ButtonRight = styled.div`
+  font-weight: 700;
 `;
 
 const OverlayModal = ({ 
@@ -174,6 +183,8 @@ const OverlayModal = ({
   onClose, 
   food, 
   children,
+  onAddToBasket,
+  quantity = 1,
   ...props 
 }) => {
   useEffect(() => {
@@ -215,26 +226,49 @@ const OverlayModal = ({
           </svg>
         </CloseButton>
         
-        {food && (
-          <ModalHeader>
-            <FoodImage>
-              {food.image ? (
-                <img src={food.image} alt={food.name} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} />
-              ) : (
-                <span>{food.emoji || '🍕'}</span>
-              )}
-            </FoodImage>
-            <FoodTitle>{food.name}</FoodTitle>
-            <FoodDescription>{food.description}</FoodDescription>
-            <FoodPrice>${food.price.toFixed(2)}</FoodPrice>
-          </ModalHeader>
-        )}
-        
         <ModalScrollContainer>
-          <ModalBody>
-            {children}
-          </ModalBody>
+          {food && (
+            <>
+              <FoodImageContainer>
+                {food.image ? (
+                  <img src={food.image} alt={food.name} />
+                ) : (
+                  <div style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center', 
+                    height: '100%',
+                    fontSize: '64px'
+                  }}>
+                    {food.emoji || '🍕'}
+                  </div>
+                )}
+              </FoodImageContainer>
+              
+              <FoodInfoContainer>
+                <FoodTitle>{food.name}</FoodTitle>
+                <FoodDescription>{food.description}</FoodDescription>
+                <FoodPrice>${food.price.toFixed(2)}</FoodPrice>
+                
+                {children}
+              </FoodInfoContainer>
+            </>
+          )}
         </ModalScrollContainer>
+        
+        <AddToBasketContainer>
+          <AddToBasketButton onClick={onAddToBasket}>
+            <ButtonLeft>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+              </svg>
+              <span>Add to Basket</span>
+            </ButtonLeft>
+            <ButtonRight>
+              ${food ? (food.price * quantity).toFixed(2) : '0.00'}
+            </ButtonRight>
+          </AddToBasketButton>
+        </AddToBasketContainer>
       </ModalContent>
     </Overlay>
   );
@@ -252,6 +286,8 @@ OverlayModal.propTypes = {
     emoji: PropTypes.string,
   }),
   children: PropTypes.node,
+  onAddToBasket: PropTypes.func,
+  quantity: PropTypes.number,
 };
 
 export default OverlayModal; 

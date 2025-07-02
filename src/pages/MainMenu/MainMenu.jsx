@@ -6,7 +6,7 @@ import FoodCard from '../../components/FoodCard/FoodCard';
 import FoodCategory from '../../components/FoodCategory/FoodCategory';
 import OverlayModal from '../../components/OverlayModal/OverlayModal';
 import QuantitySelector from '../../components/QuantitySelector/QuantitySelector';
-import CustomizationDropdown from '../../components/CustomizationDropdown/CustomizationDropdown';
+
 import Button from '../../components/Button/Button';
 import { foodCategories, getFoodByCategory, getFoodById, foodItems } from '../../data/mockData';
 
@@ -62,46 +62,215 @@ const SectionTitle = styled.h2`
   }
 `;
 
-const FoodGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-`;
-
-const ModalSection = styled.div`
-  margin-bottom: 24px;
+// Modal styled components
+const QuantitySection = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const ModalSectionTitle = styled.h3`
   font-size: 18px;
   font-weight: 600;
   color: #111827;
-  margin: 0 0 12px 0;
-`;
-
-const CheckboxContainer = styled.label`
+  margin: 0 0 16px 0;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+`;
+
+const QuantityContainer = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  color: white;
+  width: fit-content;
+`;
+
+const QuantityButton = styled.button`
+  background: white;
+  border: 2px solid #EC575C;
+  color: #EC575C;
   cursor: pointer;
-  padding: 12px 0;
+  padding: 8px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   &:hover {
-    color: #EC575C;
+    background-color: #f8f9fa;
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  img {
+    width: 20px;
+    height: 20px;
   }
 `;
 
-const Checkbox = styled.input`
-  width: 20px;
-  height: 20px;
-  accent-color: #EC575C;
-  cursor: pointer;
+const MinusButton = styled(QuantityButton)`
+  border-radius: 8px 0 0 8px;
+  border-right: none;
+  height: 40px;
 `;
 
-const CheckboxText = styled.span`
-  font-size: 16px;
-  color: #374151;
+const PlusButton = styled(QuantityButton)`
+  border-radius: 0 8px 8px 0;
+  border-left: none;
+  height: 40px;
 `;
+
+const QuantityDisplay = styled.span`
+  font-size: 20px;
+  font-weight: 500;
+  color: #5C5C5C;
+  min-width: 40px;
+  height: 40px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  background: white;
+  border: 2px solid #EC575C;
+`;
+
+const SectionDivider = styled.div`
+  height: 4px;
+  width: 100%;
+  background-color: #F3F5F5;
+  margin: 24px 0;
+  border-radius: 4px;
+`;
+
+const GlutenFreeSection = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const GlutenFreeLeft = styled.div`
+  flex: 1;
+`;
+
+const GlutenFreeTitle = styled.h4`
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 4px 0;
+`;
+
+const GlutenFreeDescription = styled.p`
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+`;
+
+const GlutenFreeCheckbox = styled.img`
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
+const CustomizationSection = styled.div`
+  margin-bottom: 16px;
+  padding: 0 0 16px 0;
+`;
+
+const CustomizationHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 16px 0;
+  border-bottom: 1px solid #e5e7eb;
+`;
+
+const CustomizationTitle = styled.h4`
+  font-size: 16px;
+  font-weight: bold;
+  color: #111827;
+  margin: 0;
+`;
+
+const CustomizationChevron = styled.img`
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+  transform: ${props => props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
+  filter: brightness(0) saturate(100%) invert(47%) sepia(8%) saturate(1234%) hue-rotate(202deg) brightness(91%) contrast(86%);
+`;
+
+const CustomizationContent = styled.div`
+  padding-top: 16px;
+`;
+
+const CustomizationOption = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #f3f4f6;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
+const OptionLeft = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+const OptionName = styled.span`
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+`;
+
+const OptionPrice = styled.span`
+  font-size: 14px;
+  color: #7D7E85;
+  font-weight: 600;
+`;
+
+const PriceAndCheckbox = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+`;
+
+const OptionCheckbox = styled.img`
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
+const FoodGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+`;
+
+
 
 const NoResults = styled.div`
   text-align: center;
@@ -114,7 +283,7 @@ const NoResults = styled.div`
   }
   
   p {
-    font-size: 16px;
+  font-size: 16px;
     margin: 0;
   }
 `;
@@ -128,6 +297,7 @@ const MainMenu = ({ basketItems = [], onAddToBasket, onBasketClick, onLogoClick 
   const [glutenFree, setGlutenFree] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredFood, setFilteredFood] = useState([]);
+  const [isCustomizationOpen, setIsCustomizationOpen] = useState(false);
 
   // Update filtered food when category or search changes
   useEffect(() => {
@@ -164,6 +334,7 @@ const MainMenu = ({ basketItems = [], onAddToBasket, onBasketClick, onLogoClick 
     setQuantity(1);
     setCustomization(null);
     setGlutenFree(false);
+    setIsCustomizationOpen(false);
     setIsModalOpen(true);
   };
 
@@ -179,9 +350,10 @@ const MainMenu = ({ basketItems = [], onAddToBasket, onBasketClick, onLogoClick 
         name: selectedFood.name,
         price: selectedFood.price,
         quantity: quantity,
-        emoji: selectedFood.emoji,
+        image: selectedFood.image,
         customization: customization ? customization.label : null,
         glutenFree: glutenFree,
+        specialInstructions: glutenFree ? 'Gluten Free preparation requested' : null,
       };
       
       onAddToBasket(basketItem);
@@ -242,59 +414,101 @@ const MainMenu = ({ basketItems = [], onAddToBasket, onBasketClick, onLogoClick 
       
       <Footer />
       
-      <OverlayModal 
-        isOpen={isModalOpen} 
+      <OverlayModal
+        isOpen={isModalOpen}
         onClose={handleCloseModal}
         food={selectedFood}
+        onAddToBasket={handleAddToBasket}
+        quantity={quantity}
       >
         {selectedFood && (
           <>
-            {selectedFood.customizations && selectedFood.customizations.length > 0 && (
-              <ModalSection>
-                <ModalSectionTitle>Customization</ModalSectionTitle>
-                <CustomizationDropdown
-                  options={selectedFood.customizations}
-                  value={customization}
-                  onChange={setCustomization}
-                />
-              </ModalSection>
-            )}
+            {/* Quantity Section */}
+            <QuantitySection>
+              <ModalSectionTitle>
+                <span>Quantity</span>
+              </ModalSectionTitle>
+              <QuantityContainer>
+                <MinusButton 
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  disabled={quantity <= 1}
+                >
+                  <img src="/src/assets/icons/minus.svg" alt="Decrease quantity" />
+                </MinusButton>
+                <QuantityDisplay>{quantity}</QuantityDisplay>
+                <PlusButton 
+                  onClick={() => setQuantity(quantity + 1)}
+                >
+                  <img src="/src/assets/icons/plus.svg" alt="Increase quantity" />
+                </PlusButton>
+              </QuantityContainer>
+            </QuantitySection>
             
-            <ModalSection>
-              <ModalSectionTitle>Quantity</ModalSectionTitle>
-              <QuantitySelector
-                quantity={quantity}
-                onQuantityChange={setQuantity}
+            <SectionDivider />
+            
+            {/* Gluten Free Section */}
+            <GlutenFreeSection>
+              <GlutenFreeLeft>
+                <GlutenFreeTitle>Gluten Free</GlutenFreeTitle>
+                <GlutenFreeDescription>
+                  {selectedFood.name === 'Pizza Margherita' ? 'Bacon and beer simmering of soda oil sprinkled on it' :
+                   selectedFood.name === 'Pepperoni Pizza' ? 'Crispy pepperoni with special seasoning blend' :
+                   selectedFood.name === 'Classic Cheeseburger' ? 'Premium beef with secret sauce blend' :
+                   'Special preparation with premium ingredients'}
+                </GlutenFreeDescription>
+              </GlutenFreeLeft>
+                            <GlutenFreeCheckbox
+                src={glutenFree ? "/src/assets/icons/radiobutton-on.svg" : "/src/assets/icons/radiobutton-off.svg"}
+                alt={glutenFree ? "Gluten Free selected" : "Gluten Free not selected"}
+                onClick={() => setGlutenFree(!glutenFree)}
               />
-            </ModalSection>
+            </GlutenFreeSection>
             
-            <ModalSection>
-              <CheckboxContainer>
-                <Checkbox
-                  type="checkbox"
-                  checked={glutenFree}
-                  onChange={(e) => setGlutenFree(e.target.checked)}
-                />
-                <CheckboxText>Gluten Free</CheckboxText>
-              </CheckboxContainer>
-            </ModalSection>
+            <SectionDivider />
             
-            <div style={{ display: 'flex', gap: '12px', marginTop: '32px' }}>
-              <Button
-                variant="secondary"
-                onClick={handleCloseModal}
-                style={{ flex: 1 }}
-              >
-                Cancel
-              </Button>
-              <Button
-                variant="primary"
-                onClick={handleAddToBasket}
-                style={{ flex: 1 }}
-              >
-                Add to Basket - ${(selectedFood.price * quantity).toFixed(2)}
-              </Button>
-            </div>
+            {/* Customization Section */}
+            {selectedFood.customizations && selectedFood.customizations.length > 0 && (
+              <CustomizationSection>
+                <CustomizationHeader onClick={() => setIsCustomizationOpen(!isCustomizationOpen)}>
+                  <CustomizationTitle>Customize</CustomizationTitle>
+                  <CustomizationChevron 
+                    isOpen={isCustomizationOpen} 
+                    src="/src/assets/icons/chevron_big_down.svg" 
+                    alt="Toggle customization"
+                  />
+                </CustomizationHeader>
+                
+                {isCustomizationOpen && (
+                  <CustomizationContent>
+                    {selectedFood.customizations.map((option) => (
+                      <CustomizationOption key={option.value}>
+                       
+                        <OptionName>{option.label}</OptionName>
+
+            <PriceAndCheckbox>
+                          <OptionPrice>+${option.price ? option.price.toFixed(2) : '0.00'}</OptionPrice>
+                          <OptionCheckbox
+                            src={(customization && customization.value === option.value) ? "/src/assets/icons/radiobutton-on.svg" : "/src/assets/icons/radiobutton-off.svg"}
+                            alt={(customization && customization.value === option.value) ? `${option.label} selected` : `${option.label} not selected`}
+                            onClick={() => {
+                              if (customization && customization.value === option.value) {
+                                setCustomization(null);
+                              } else {
+                                setCustomization(option);
+                              }
+                            }}
+                          />
+                  </PriceAndCheckbox>
+                        {/* <OptionLeft>
+                       
+                        </OptionLeft> */}
+
+                      </CustomizationOption>
+                    ))}
+                  </CustomizationContent>
+                )}
+              </CustomizationSection>
+            )}
           </>
         )}
       </OverlayModal>
