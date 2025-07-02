@@ -27,7 +27,7 @@ const ModalContent = styled.div`
   max-width: 500px;
   width: 100%;
   max-height: 90vh;
-  overflow-y: auto;
+  overflow: hidden;
   position: relative;
   animation: slideIn 0.3s ease;
   
@@ -47,24 +47,45 @@ const CloseButton = styled.button`
   position: absolute;
   top: 16px;
   right: 16px;
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: #6b7280;
-  cursor: pointer;
-  padding: 8px;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.2s ease;
   z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   
   &:hover {
     background-color: #f3f4f6;
-    color: #374151;
+    border-color: #d1d5db;
+    transform: scale(1.05);
   }
   
   &:focus {
     outline: 2px solid #EC575C;
     outline-offset: 2px;
+  }
+  
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: #6b7280;
+  }
+`;
+
+const ModalScrollContainer = styled.div`
+  max-height: 90vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  
+  &::-webkit-scrollbar {
+    display: none;
   }
 `;
 
@@ -189,7 +210,9 @@ const OverlayModal = ({
           aria-label="Close modal"
           tabIndex={0}
         >
-          ×
+          <svg viewBox="0 0 24 24">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          </svg>
         </CloseButton>
         
         {food && (
@@ -207,9 +230,11 @@ const OverlayModal = ({
           </ModalHeader>
         )}
         
-        <ModalBody>
-          {children}
-        </ModalBody>
+        <ModalScrollContainer>
+          <ModalBody>
+            {children}
+          </ModalBody>
+        </ModalScrollContainer>
       </ModalContent>
     </Overlay>
   );

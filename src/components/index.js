@@ -10,6 +10,9 @@ export { default as Footer } from "./Footer/Footer";
 // FoodCard
 export { default as FoodCard } from "./FoodCard/FoodCard";
 
+// FoodCategory
+export { default as FoodCategory } from "./FoodCategory/FoodCategory";
+
 // OverlayModal
 export { default as OverlayModal } from "./OverlayModal/OverlayModal";
 

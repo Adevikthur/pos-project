@@ -4,6 +4,7 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import Button from '../../components/Button/Button';
+import OverlayModal from '../../components/OverlayModal/OverlayModal';
 
 const PageContainer = styled.div`
   min-height: 100vh;
@@ -217,6 +218,15 @@ const DeliveryInfo = ({
     zipCode: deliveryInfo.zipCode || '',
     deliveryInstructions: deliveryInfo.deliveryInstructions || '',
   });
+  
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+  const [addressFormData, setAddressFormData] = useState({
+    address: formData.address || '',
+    city: formData.city || '',
+    state: formData.state || '',
+    zipCode: formData.zipCode || '',
+    deliveryInstructions: formData.deliveryInstructions || '',
+  });
 
   const subtotal = basketItems.reduce((total, item) => total + (item.price * item.quantity), 0);
   const tax = subtotal * 0.08;
@@ -245,6 +255,34 @@ const DeliveryInfo = ({
         orderTotal: total,
       });
     }
+  };
+
+  const handleOpenAddressModal = () => {
+    setAddressFormData({
+      address: formData.address || '',
+      city: formData.city || '',
+      state: formData.state || '',
+      zipCode: formData.zipCode || '',
+      deliveryInstructions: formData.deliveryInstructions || '',
+    });
+    setIsAddressModalOpen(true);
+  };
+
+  const handleCloseAddressModal = () => {
+    setIsAddressModalOpen(false);
+  };
+
+  const handleAddressFormChange = (field, value) => {
+    setAddressFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSaveAddress = () => {
+    const newFormData = { ...formData, ...addressFormData };
+    setFormData(newFormData);
+    if (onDeliveryInfoChange) {
+      onDeliveryInfoChange(newFormData);
+    }
+    setIsAddressModalOpen(false);
   };
 
   const isFormValid = formData.firstName && formData.lastName && formData.email && 
@@ -315,72 +353,51 @@ const DeliveryInfo = ({
               </FormContainer>
               
               <FormContainer>
-                <FormTitle>Delivery Address</FormTitle>
-                <FormGrid>
-                  <FullWidthField>
-                    <FieldLabel htmlFor="address">Street Address *</FieldLabel>
-                    <FieldInput
-                      id="address"
-                      type="text"
-                      value={formData.address}
-                      onChange={(e) => handleInputChange('address', e.target.value)}
-                      placeholder="Enter your street address"
-                      required
-                    />
-                  </FullWidthField>
-                  
-                  <FormField>
-                    <FieldLabel htmlFor="city">City *</FieldLabel>
-                    <FieldInput
-                      id="city"
-                      type="text"
-                      value={formData.city}
-                      onChange={(e) => handleInputChange('city', e.target.value)}
-                      placeholder="Enter your city"
-                      required
-                    />
-                  </FormField>
-                  
-                  <FormField>
-                    <FieldLabel htmlFor="state">State *</FieldLabel>
-                    <FieldSelect
-                      id="state"
-                      value={formData.state}
-                      onChange={(e) => handleInputChange('state', e.target.value)}
-                      required
-                    >
-                      <option value="">Select State</option>
-                      <option value="CA">California</option>
-                      <option value="NY">New York</option>
-                      <option value="TX">Texas</option>
-                      <option value="FL">Florida</option>
-                      <option value="IL">Illinois</option>
-                    </FieldSelect>
-                  </FormField>
-                  
-                  <FormField>
-                    <FieldLabel htmlFor="zipCode">ZIP Code *</FieldLabel>
-                    <FieldInput
-                      id="zipCode"
-                      type="text"
-                      value={formData.zipCode}
-                      onChange={(e) => handleInputChange('zipCode', e.target.value)}
-                      placeholder="Enter ZIP code"
-                      required
-                    />
-                  </FormField>
-                  
-                  <FullWidthField>
-                    <FieldLabel htmlFor="deliveryInstructions">Delivery Instructions</FieldLabel>
-                    <FieldInput
-                      id="deliveryInstructions"
-                      type="text"
-                      value={formData.deliveryInstructions}
-                      onChange={(e) => handleInputChange('deliveryInstructions', e.target.value)}
-                      placeholder="Any special delivery instructions (optional)"
-                    />
-                  </FullWidthField>
-                </FormGrid>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+                  <FormTitle>Delivery Address</FormTitle>
+                  <Button
+                    variant="secondary"
+                    onClick={handleOpenAddressModal}
+                    style={{ fontSize: '14px', padding: '8px 16px' }}
+                  >
+                    {formData.address ? 'Edit Address' : 'Add Address'}
+                  </Button>
+                </div>
+                
+                {formData.address ? (
+                  <div style={{ 
+                    padding: '16px', 
+                    backgroundColor: '#f9fafb', 
+                    border: '1px solid #e5e7eb', 
+                    borderRadius: '8px',
+                    marginBottom: '16px'
+                  }}>
+                    <div style={{ fontWeight: '500', marginBottom: '8px' }}>
+                      {formData.firstName} {formData.lastName}
+                    </div>
+                    <div style={{ color: '#6b7280', lineHeight: '1.5' }}>
+                      {formData.address}<br />
+                      {formData.city}, {formData.state} {formData.zipCode}
+                      {formData.deliveryInstructions && (
+                        <>
+                          <br />
+                          <strong>Instructions:</strong> {formData.deliveryInstructions}
+                        </>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <div style={{ 
+                    padding: '16px', 
+                    backgroundColor: '#fef7f7', 
+                    border: '1px solid #fecaca', 
+                    borderRadius: '8px',
+                    color: '#dc2626',
+                    textAlign: 'center'
+                  }}>
+                    No delivery address set. Please add an address to continue.
+                  </div>
+                )}
               </FormContainer>
               
               <FormContainer>
@@ -501,6 +518,144 @@ const DeliveryInfo = ({
       </MainContent>
       
       <Footer />
+      
+      <OverlayModal 
+        isOpen={isAddressModalOpen} 
+        onClose={handleCloseAddressModal}
+      >
+        <div style={{ padding: '24px', maxWidth: '500px', width: '100%' }}>
+          <h2 style={{ margin: '0 0 24px 0', fontSize: '24px', fontWeight: '600' }}>
+            {formData.address ? 'Edit Delivery Address' : 'Add Delivery Address'}
+          </h2>
+          
+          <div style={{ display: 'grid', gap: '20px', marginBottom: '32px' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', marginBottom: '8px' }}>
+                Street Address *
+              </label>
+              <input
+                type="text"
+                value={addressFormData.address}
+                onChange={(e) => handleAddressFormChange('address', e.target.value)}
+                placeholder="Enter your street address"
+                style={{
+                  width: '100%',
+                  padding: '12px 16px',
+                  border: '1px solid #e5e7eb',
+                  borderRadius: '8px',
+                  fontSize: '16px'
+                }}
+                required
+              />
+            </div>
+            
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', marginBottom: '8px' }}>
+                  City *
+                </label>
+                <input
+                  type="text"
+                  value={addressFormData.city}
+                  onChange={(e) => handleAddressFormChange('city', e.target.value)}
+                  placeholder="Enter your city"
+                  style={{
+                    width: '100%',
+                    padding: '12px 16px',
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '8px',
+                    fontSize: '16px'
+                  }}
+                  required
+                />
+              </div>
+              
+              <div>
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', marginBottom: '8px' }}>
+                  State *
+                </label>
+                <select
+                  value={addressFormData.state}
+                  onChange={(e) => handleAddressFormChange('state', e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '12px 16px',
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '8px',
+                    fontSize: '16px',
+                    backgroundColor: 'white'
+                  }}
+                  required
+                >
+                  <option value="">Select State</option>
+                  <option value="CA">California</option>
+                  <option value="NY">New York</option>
+                  <option value="TX">Texas</option>
+                  <option value="FL">Florida</option>
+                  <option value="IL">Illinois</option>
+                </select>
+              </div>
+            </div>
+            
+            <div>
+              <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', marginBottom: '8px' }}>
+                ZIP Code *
+              </label>
+              <input
+                type="text"
+                value={addressFormData.zipCode}
+                onChange={(e) => handleAddressFormChange('zipCode', e.target.value)}
+                placeholder="Enter ZIP code"
+                style={{
+                  width: '100%',
+                  padding: '12px 16px',
+                  border: '1px solid #e5e7eb',
+                  borderRadius: '8px',
+                  fontSize: '16px'
+                }}
+                required
+              />
+            </div>
+            
+            <div>
+              <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', marginBottom: '8px' }}>
+                Delivery Instructions
+              </label>
+              <input
+                type="text"
+                value={addressFormData.deliveryInstructions}
+                onChange={(e) => handleAddressFormChange('deliveryInstructions', e.target.value)}
+                placeholder="Any special delivery instructions (optional)"
+                style={{
+                  width: '100%',
+                  padding: '12px 16px',
+                  border: '1px solid #e5e7eb',
+                  borderRadius: '8px',
+                  fontSize: '16px'
+                }}
+              />
+            </div>
+          </div>
+          
+          <div style={{ display: 'flex', gap: '12px' }}>
+            <Button
+              variant="secondary"
+              onClick={handleCloseAddressModal}
+              style={{ flex: 1 }}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="primary"
+              onClick={handleSaveAddress}
+              style={{ flex: 1 }}
+              disabled={!addressFormData.address || !addressFormData.city || !addressFormData.state || !addressFormData.zipCode}
+            >
+              Save Address
+            </Button>
+          </div>
+        </div>
+      </OverlayModal>
     </PageContainer>
   );
 };

@@ -1,6 +1,13 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
+// Import images
+import burgerImage from '../../assets/images/burger.png';
+import noodlesImage from '../../assets/images/noodles.png';
+import drinksImage from '../../assets/images/drinks.png';
+import dessertsImage from '../../assets/images/desserts.png';
+import chickenImage from '../../assets/images/chicken.png';
+
 const CardContainer = styled.div`
   background-color: white;
   border: 1px solid #e5e7eb;
@@ -92,6 +99,25 @@ const FoodCard = ({
   onClick,
   ...props 
 }) => {
+  const getFoodImage = (food) => {
+    // If food has a specific image, use it
+    if (food.image) {
+      return food.image;
+    }
+    
+    // Otherwise, use category-based images
+    const categoryImages = {
+      pizza: burgerImage, // Using burger.png as placeholder for pizza
+      burgers: burgerImage,
+      pasta: noodlesImage,
+      drinks: drinksImage,
+      desserts: dessertsImage,
+      salads: chickenImage
+    };
+    
+    return categoryImages[food.categoryId] || burgerImage;
+  };
+
   const handleClick = (e) => {
     if (onClick) {
       onClick(food, e);
@@ -115,11 +141,7 @@ const FoodCard = ({
       {...props}
     >
       <ImageContainer>
-        {food.image ? (
-          <FoodImage src={food.image} alt={food.name} />
-        ) : (
-          <span>{food.emoji || '🍕'}</span>
-        )}
+        <FoodImage src={getFoodImage(food)} alt={food.name} />
       </ImageContainer>
       
       <CardContent>
@@ -148,6 +170,7 @@ FoodCard.propTypes = {
     image: PropTypes.string,
     emoji: PropTypes.string,
     badge: PropTypes.string,
+    categoryId: PropTypes.string,
   }).isRequired,
   onClick: PropTypes.func,
 };
