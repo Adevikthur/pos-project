@@ -48,6 +48,7 @@ export const foodItems = [
     price: 14.99,
     emoji: "🍕",
     badge: "Vegetarian",
+    containsGluten: true,
     customizations: [
       { value: "thin", label: "Thin Crust", price: 0 },
       { value: "thick", label: "Thick Crust", price: 0 },
@@ -63,6 +64,7 @@ export const foodItems = [
     description: "Classic pepperoni with melted cheese and tomato sauce",
     price: 16.99,
     emoji: "🍕",
+    containsGluten: true,
     customizations: [
       { value: "thin", label: "Thin Crust", price: 0 },
       { value: "thick", label: "Thick Crust", price: 0 },
@@ -80,6 +82,7 @@ export const foodItems = [
     price: 19.99,
     emoji: "🍕",
     image: "/src/assets/images/pizza.png",
+    containsGluten: true,
     customizations: [
       { value: "thin", label: "Thin Crust", price: 0 },
       { value: "thick", label: "Thick Crust", price: 0 },
@@ -95,6 +98,7 @@ export const foodItems = [
     price: 18.99,
     emoji: "🍕",
     image: "/src/assets/images/pizza.png",
+    containsGluten: true,
     customizations: [
       { value: "thin", label: "Thin Crust", price: 0 },
       { value: "thick", label: "Thick Crust", price: 0 },
@@ -110,6 +114,7 @@ export const foodItems = [
     price: 17.99,
     emoji: "🍕",
     image: "/src/assets/images/pizza.png",
+    containsGluten: true,
     customizations: [
       { value: "thin", label: "Thin Crust", price: 0 },
       { value: "thick", label: "Thick Crust", price: 0 },
@@ -127,6 +132,7 @@ export const foodItems = [
       "Juicy beef patty with melted cheese, lettuce, tomato, and special sauce",
     price: 12.99,
     emoji: "🍔",
+    containsGluten: true,
     customizations: [
       { value: "rare", label: "Rare" },
       { value: "medium-rare", label: "Medium Rare" },
@@ -144,6 +150,7 @@ export const foodItems = [
     price: 15.99,
     emoji: "🍔",
     image: "/src/assets/images/burger-chicken.png",
+    containsGluten: true,
     customizations: [
       { value: "rare", label: "Rare" },
       { value: "medium-rare", label: "Medium Rare" },
@@ -159,6 +166,7 @@ export const foodItems = [
     price: 13.99,
     emoji: "🍔",
     badge: "Vegetarian",
+    containsGluten: true,
     customizations: [
       { value: "grilled", label: "Grilled" },
       { value: "fried", label: "Fried" },
@@ -171,6 +179,7 @@ export const foodItems = [
     description: "Beef patty with sautéed mushrooms and Swiss cheese",
     price: 14.99,
     emoji: "🍔",
+    containsGluten: true,
     customizations: [
       { value: "rare", label: "Rare" },
       { value: "medium-rare", label: "Medium Rare" },
@@ -185,6 +194,7 @@ export const foodItems = [
     description: "Two beef patties with double cheese and all the fixings",
     price: 18.99,
     emoji: "🍔",
+    containsGluten: true,
     customizations: [
       { value: "rare", label: "Rare" },
       { value: "medium-rare", label: "Medium Rare" },
@@ -203,6 +213,7 @@ export const foodItems = [
     price: 16.99,
     emoji: "🍝",
     image: "/src/assets/images/noodles-ramen.png",
+    containsGluten: true,
     customizations: [
       { value: "al-dente", label: "Al Dente" },
       { value: "soft", label: "Soft" },
@@ -218,6 +229,7 @@ export const foodItems = [
     emoji: "🍝",
     badge: "Vegetarian",
     image: "/src/assets/images/noodles-chowmein.png",
+    containsGluten: true,
     customizations: [
       { value: "al-dente", label: "Al Dente" },
       { value: "soft", label: "Soft" },
@@ -232,6 +244,7 @@ export const foodItems = [
     price: 14.99,
     emoji: "🍝",
     badge: "Vegetarian",
+    containsGluten: true,
     customizations: [
       { value: "al-dente", label: "Al Dente" },
       { value: "soft", label: "Soft" },
@@ -245,6 +258,7 @@ export const foodItems = [
     description: "Fresh clams in white wine sauce with garlic and parsley",
     price: 18.99,
     emoji: "🍝",
+    containsGluten: true,
     customizations: [
       { value: "al-dente", label: "Al Dente" },
       { value: "soft", label: "Soft" },
@@ -258,6 +272,7 @@ export const foodItems = [
     description: "Layers of pasta with rich meat sauce and melted cheese",
     price: 17.99,
     emoji: "🍝",
+    containsGluten: true,
     customizations: [
       { value: "al-dente", label: "Al Dente" },
       { value: "soft", label: "Soft" },
@@ -275,6 +290,7 @@ export const foodItems = [
     price: 9.99,
     emoji: "🥗",
     badge: "Vegetarian",
+    containsGluten: true,
     customizations: [
       { value: "light-dressing", label: "Light Dressing" },
       { value: "extra-dressing", label: "Extra Dressing" },
@@ -290,6 +306,7 @@ export const foodItems = [
     price: 11.99,
     emoji: "🥗",
     badge: "Vegetarian",
+    containsGluten: false,
     customizations: [
       { value: "light-dressing", label: "Light Dressing" },
       { value: "extra-dressing", label: "Extra Dressing" },
@@ -304,6 +321,7 @@ export const foodItems = [
       "Mixed greens with chicken, bacon, eggs, avocado, and blue cheese",
     price: 13.99,
     emoji: "🥗",
+    containsGluten: false,
     customizations: [
       { value: "light-dressing", label: "Light Dressing" },
       { value: "extra-dressing", label: "Extra Dressing" },
@@ -318,6 +336,7 @@ export const foodItems = [
     price: 12.99,
     emoji: "🥗",
     badge: "Vegetarian",
+    containsGluten: false,
     customizations: [
       { value: "light-dressing", label: "Light Dressing" },
       { value: "extra-dressing", label: "Extra Dressing" },
@@ -332,6 +351,7 @@ export const foodItems = [
     price: 10.99,
     emoji: "🥗",
     badge: "Vegetarian",
+    containsGluten: false,
     customizations: [
       { value: "light-dressing", label: "Light Dressing" },
       { value: "extra-dressing", label: "Extra Dressing" },
@@ -347,6 +367,7 @@ export const foodItems = [
     description: "Classic Coca Cola soft drink",
     price: 2.99,
     emoji: "🥤",
+    containsGluten: false,
     customizations: [
       { value: "regular", label: "Regular" },
       { value: "diet", label: "Diet" },
@@ -363,6 +384,7 @@ export const foodItems = [
     price: 3.99,
     emoji: "🥤",
     badge: "Vegetarian",
+    containsGluten: false,
     customizations: [
       { value: "regular", label: "Regular" },
       { value: "strawberry", label: "Strawberry" },
@@ -376,6 +398,7 @@ export const foodItems = [
     description: "Cold brewed coffee with cream and sugar",
     price: 4.99,
     emoji: "🥤",
+    containsGluten: false,
     customizations: [
       { value: "regular", label: "Regular" },
       { value: "vanilla", label: "Vanilla" },
@@ -390,6 +413,7 @@ export const foodItems = [
     price: 8.99,
     emoji: "🥤",
     badge: "Vegetarian",
+    containsGluten: false,
     customizations: [
       { value: "acai", label: "Acai" },
       { value: "strawberry", label: "Strawberry" },
@@ -404,6 +428,7 @@ export const foodItems = [
     price: 2.49,
     emoji: "🥤",
     badge: "Vegetarian",
+    containsGluten: false,
     customizations: [
       { value: "lime", label: "Lime" },
       { value: "lemon", label: "Lemon" },
@@ -420,6 +445,7 @@ export const foodItems = [
     price: 8.99,
     emoji: "🍰",
     badge: "Vegetarian",
+    containsGluten: true,
     customizations: [
       { value: "vanilla-ice-cream", label: "Vanilla Ice Cream" },
       { value: "chocolate-ice-cream", label: "Chocolate Ice Cream" },
@@ -434,6 +460,7 @@ export const foodItems = [
     price: 7.99,
     emoji: "🍰",
     badge: "Vegetarian",
+    containsGluten: true,
     customizations: [
       { value: "strawberry", label: "Strawberry" },
       { value: "blueberry", label: "Blueberry" },
@@ -448,11 +475,11 @@ export const foodItems = [
       "Italian dessert with coffee-soaked ladyfingers and mascarpone",
     price: 9.99,
     emoji: "🍰",
-    badge: "Vegetarian",
+    containsGluten: true,
     customizations: [
-      { value: "regular", label: "Regular" },
       { value: "extra-coffee", label: "Extra Coffee" },
       { value: "light-coffee", label: "Light Coffee" },
+      { value: "no-coffee", label: "No Coffee" },
     ],
   },
   {
@@ -463,6 +490,7 @@ export const foodItems = [
     price: 6.99,
     emoji: "🍰",
     badge: "Vegetarian",
+    containsGluten: true,
     customizations: [
       { value: "vanilla-ice-cream", label: "Vanilla Ice Cream" },
       { value: "caramel-sauce", label: "Caramel Sauce" },
@@ -477,10 +505,11 @@ export const foodItems = [
     price: 7.99,
     emoji: "🍰",
     badge: "Vegetarian",
+    containsGluten: false,
     customizations: [
-      { value: "vanilla", label: "Vanilla" },
-      { value: "chocolate", label: "Chocolate" },
-      { value: "strawberry", label: "Strawberry" },
+      { value: "chocolate-sauce", label: "Chocolate Sauce" },
+      { value: "caramel-sauce", label: "Caramel Sauce" },
+      { value: "no-sprinkles", label: "No Sprinkles" },
     ],
   },
 ];

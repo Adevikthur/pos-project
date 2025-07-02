@@ -1,6 +1,10 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
+// Import SVG icons
+import plusIcon from '../../assets/icons/plus.svg';
+import minusIcon from '../../assets/icons/minus.svg';
+
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -44,6 +48,21 @@ const Button = styled.button`
   &:focus {
     outline: 2px solid #EC575C;
     outline-offset: 2px;
+  }
+  
+  img {
+    width: 16px;
+    height: 16px;
+    filter: brightness(0) saturate(100%) invert(47%) sepia(8%) saturate(1234%) hue-rotate(202deg) brightness(91%) contrast(86%);
+    transition: filter 0.2s ease;
+  }
+  
+  &:hover:not(:disabled) img {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+  }
+  
+  &:disabled img {
+    opacity: 0.5;
   }
 `;
 
@@ -99,7 +118,7 @@ const QuantitySelector = ({
         disabled={disabled || quantity <= min}
         aria-label="Decrease quantity"
       >
-        -
+        <img src={minusIcon} alt="Decrease quantity" />
       </Button>
       
       <QuantityDisplay aria-live="polite">
@@ -111,7 +130,7 @@ const QuantitySelector = ({
         disabled={disabled || quantity >= max}
         aria-label="Increase quantity"
       >
-        +
+        <img src={plusIcon} alt="Increase quantity" />
       </Button>
     </Container>
   );

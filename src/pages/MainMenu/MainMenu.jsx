@@ -444,25 +444,27 @@ const MainMenu = ({ basketItems = [], onAddToBasket, onBasketClick, onLogoClick 
               </QuantityContainer>
             </QuantitySection>
             
-            <SectionDivider />
+                        {selectedFood.containsGluten && <SectionDivider />}
             
-            {/* Gluten Free Section */}
-            <GlutenFreeSection>
-              <GlutenFreeLeft>
-                <GlutenFreeTitle>Gluten Free</GlutenFreeTitle>
-                <GlutenFreeDescription>
-                  {selectedFood.name === 'Pizza Margherita' ? 'Bacon and beer simmering of soda oil sprinkled on it' :
-                   selectedFood.name === 'Pepperoni Pizza' ? 'Crispy pepperoni with special seasoning blend' :
-                   selectedFood.name === 'Classic Cheeseburger' ? 'Premium beef with secret sauce blend' :
-                   'Special preparation with premium ingredients'}
-                </GlutenFreeDescription>
-              </GlutenFreeLeft>
-                            <GlutenFreeCheckbox
-                src={glutenFree ? "/src/assets/icons/radiobutton-on.svg" : "/src/assets/icons/radiobutton-off.svg"}
-                alt={glutenFree ? "Gluten Free selected" : "Gluten Free not selected"}
-                onClick={() => setGlutenFree(!glutenFree)}
-              />
-            </GlutenFreeSection>
+            {/* Gluten Free Section - Only show for foods that contain gluten */}
+            {selectedFood.containsGluten && (
+              <GlutenFreeSection>
+                <GlutenFreeLeft>
+                  <GlutenFreeTitle>Gluten Free</GlutenFreeTitle>
+                  <GlutenFreeDescription>
+                    {selectedFood.name === 'Pizza Margherita' ? 'Bacon and beer simmering of soda oil sprinkled on it' :
+                     selectedFood.name === 'Pepperoni Pizza' ? 'Crispy pepperoni with special seasoning blend' :
+                     selectedFood.name === 'Classic Cheeseburger' ? 'Premium beef with secret sauce blend' :
+                     'Special preparation with premium ingredients'}
+                  </GlutenFreeDescription>
+                </GlutenFreeLeft>
+                <GlutenFreeCheckbox
+                  src={glutenFree ? "/src/assets/icons/radiobutton-on.svg" : "/src/assets/icons/radiobutton-off.svg"}
+                  alt={glutenFree ? "Gluten Free selected" : "Gluten Free not selected"}
+                  onClick={() => setGlutenFree(!glutenFree)}
+                />
+              </GlutenFreeSection>
+            )}
             
             <SectionDivider />
             

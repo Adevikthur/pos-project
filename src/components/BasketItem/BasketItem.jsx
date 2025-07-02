@@ -2,10 +2,14 @@ import { useState } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
+// Import SVG icons
+import plusIcon from '../../assets/icons/plus.svg';
+import minusIcon from '../../assets/icons/minus.svg';
+import trashIcon from '../../assets/icons/trash_full.svg';
 
 const ItemContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
   padding: 16px;
   border: 1px solid #e5e7eb;
@@ -39,13 +43,16 @@ const ItemImage = styled.div`
 const ItemContent = styled.div`
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
 
 const ItemName = styled.h3`
   font-size: 16px;
   font-weight: 600;
   color: #111827;
-  margin: 0 0 4px 0;
+  margin: 0 0 8px 0;
   line-height: 1.3;
   
   @media (min-width: 768px) {
@@ -129,6 +136,21 @@ const ActionButton = styled.button`
     height: 36px;
     font-size: 18px;
   }
+  
+  img {
+    width: 16px;
+    height: 16px;
+    filter: brightness(0) saturate(100%) invert(47%) sepia(8%) saturate(1234%) hue-rotate(202deg) brightness(91%) contrast(86%);
+    transition: filter 0.2s ease;
+  }
+  
+  &:hover:not(:disabled) img {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+  }
+  
+  &:disabled img {
+    opacity: 0.5;
+  }
 `;
 
 const DeleteButton = styled(ActionButton)`
@@ -143,10 +165,16 @@ const DeleteButton = styled(ActionButton)`
     color: white;
   }
   
-  svg {
+  img {
     width: 16px;
     height: 16px;
-    fill: currentColor;
+    filter: brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
+    transition: filter 0.2s ease;
+  }
+  
+  &:hover:not(:disabled) img {
+    
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
   }
 `;
 
@@ -267,7 +295,7 @@ const BasketItem = ({
           disabled={item.quantity <= 1}
           aria-label="Decrease quantity"
         >
-          -
+          <img src={minusIcon} alt="Decrease quantity" />
         </ActionButton>
         
         <QuantityDisplay aria-live="polite">
@@ -278,16 +306,14 @@ const BasketItem = ({
           onClick={handleIncrement}
           aria-label="Increase quantity"
         >
-          +
+          <img src={plusIcon} alt="Increase quantity" />
         </ActionButton>
         
         <DeleteButton
           onClick={handleRemove}
           aria-label="Remove item"
         >
-          <svg viewBox="0 0 24 24">
-            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
-          </svg>
+          <img src={trashIcon} alt="Remove item" />
         </DeleteButton>
       </ItemActions>
     </ItemContainer>
