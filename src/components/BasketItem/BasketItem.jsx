@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import plusIcon from '../../assets/icons/plus.svg';
 import minusIcon from '../../assets/icons/minus.svg';
 import trashIcon from '../../assets/icons/trash_full.svg';
+import chevronBigDownIcon from '../../assets/icons/chevron_big_down.svg';
 
 const ItemContainer = styled.div`
   display: flex;
@@ -269,7 +270,7 @@ const BasketItem = ({
               <InstructionsTitle>Special Instructions</InstructionsTitle>
               <ChevronIcon 
                 isOpen={isInstructionsOpen} 
-                src="/src/assets/icons/chevron_big_down.svg" 
+                src={chevronBigDownIcon} 
                 alt="Toggle instructions"
               />
             </InstructionsHeader>

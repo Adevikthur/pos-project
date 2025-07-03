@@ -10,6 +10,13 @@ import QuantitySelector from '../../components/QuantitySelector/QuantitySelector
 import Button from '../../components/Button/Button';
 import { foodCategories, getFoodByCategory, getFoodById, foodItems } from '../../data/mockData';
 
+// Import SVG icons
+import minusIcon from '../../assets/icons/minus.svg';
+import plusIcon from '../../assets/icons/plus.svg';
+import radiobuttonOnIcon from '../../assets/icons/radiobutton-on.svg';
+import radiobuttonOffIcon from '../../assets/icons/radiobutton-off.svg';
+import chevronBigDownIcon from '../../assets/icons/chevron_big_down.svg';
+
 const PageContainer = styled.div`
   min-height: 100vh;
   display: flex;
@@ -433,13 +440,13 @@ const MainMenu = ({ basketItems = [], onAddToBasket, onBasketClick, onLogoClick 
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                   disabled={quantity <= 1}
                 >
-                  <img src="/src/assets/icons/minus.svg" alt="Decrease quantity" />
+                  <img src={minusIcon} alt="Decrease quantity" />
                 </MinusButton>
                 <QuantityDisplay>{quantity}</QuantityDisplay>
                 <PlusButton 
                   onClick={() => setQuantity(quantity + 1)}
                 >
-                  <img src="/src/assets/icons/plus.svg" alt="Increase quantity" />
+                  <img src={plusIcon} alt="Increase quantity" />
                 </PlusButton>
               </QuantityContainer>
             </QuantitySection>
@@ -459,7 +466,7 @@ const MainMenu = ({ basketItems = [], onAddToBasket, onBasketClick, onLogoClick 
                   </GlutenFreeDescription>
                 </GlutenFreeLeft>
                 <GlutenFreeCheckbox
-                  src={glutenFree ? "/src/assets/icons/radiobutton-on.svg" : "/src/assets/icons/radiobutton-off.svg"}
+                  src={glutenFree ? radiobuttonOnIcon : radiobuttonOffIcon}
                   alt={glutenFree ? "Gluten Free selected" : "Gluten Free not selected"}
                   onClick={() => setGlutenFree(!glutenFree)}
                 />
@@ -475,7 +482,7 @@ const MainMenu = ({ basketItems = [], onAddToBasket, onBasketClick, onLogoClick 
                   <CustomizationTitle>Customize</CustomizationTitle>
                   <CustomizationChevron 
                     isOpen={isCustomizationOpen} 
-                    src="/src/assets/icons/chevron_big_down.svg" 
+                    src={chevronBigDownIcon} 
                     alt="Toggle customization"
                   />
                 </CustomizationHeader>
@@ -490,7 +497,7 @@ const MainMenu = ({ basketItems = [], onAddToBasket, onBasketClick, onLogoClick 
             <PriceAndCheckbox>
                           <OptionPrice>+${option.price ? option.price.toFixed(2) : '0.00'}</OptionPrice>
                           <OptionCheckbox
-                            src={(customization && customization.value === option.value) ? "/src/assets/icons/radiobutton-on.svg" : "/src/assets/icons/radiobutton-off.svg"}
+                            src={(customization && customization.value === option.value) ? radiobuttonOnIcon : radiobuttonOffIcon}
                             alt={(customization && customization.value === option.value) ? `${option.label} selected` : `${option.label} not selected`}
                             onClick={() => {
                               if (customization && customization.value === option.value) {

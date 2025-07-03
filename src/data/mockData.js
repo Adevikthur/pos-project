@@ -1,3 +1,18 @@
+// Import food images
+import pizzaMargheritaImage from "../assets/images/pizza-margherita.png";
+import pizzaImage from "../assets/images/pizza.png";
+import burgerClassicImage from "../assets/images/burger-classic.png";
+import burgerChickenImage from "../assets/images/burger-chicken.png";
+import noodlesRamenImage from "../assets/images/noodles-ramen.png";
+import noodlesChowmeinImage from "../assets/images/noodles-chowmein.png";
+import chickenRoastImage from "../assets/images/chicken-roast.png";
+import chickenSaladImage from "../assets/images/chicken-salad.png";
+import chickenImage from "../assets/images/chicken.png";
+import dessertBrownieImage from "../assets/images/dessert-brownie.png";
+import dessertCheesecakeImage from "../assets/images/dessert-cheesecake.png";
+import drinkColaImage from "../assets/images/drink-cola.png";
+import drinkMilkshakeImage from "../assets/images/drink-milkshake.png";
+
 export const foodCategories = [
   {
     id: "pizza",
@@ -55,7 +70,7 @@ export const foodItems = [
       { value: "stuffed", label: "Stuffed Crust", price: 2.99 },
       { value: "gluten-free", label: "Gluten Free Crust", price: 3.99 },
     ],
-    image: "/src/assets/images/pizza-margherita.png",
+    image: pizzaMargheritaImage,
   },
   {
     id: "pizza-2",
@@ -71,7 +86,7 @@ export const foodItems = [
       { value: "stuffed", label: "Stuffed Crust", price: 2.99 },
       { value: "gluten-free", label: "Gluten Free Crust", price: 3.99 },
     ],
-    image: "/src/assets/images/pizza.png",
+    image: pizzaImage,
   },
   {
     id: "pizza-3",
@@ -81,7 +96,7 @@ export const foodItems = [
       "Loaded with pepperoni, sausage, mushrooms, bell peppers, and onions",
     price: 19.99,
     emoji: "🍕",
-    image: "/src/assets/images/pizza.png",
+    image: pizzaImage,
     containsGluten: true,
     customizations: [
       { value: "thin", label: "Thin Crust", price: 0 },
@@ -97,7 +112,7 @@ export const foodItems = [
     description: "BBQ sauce, grilled chicken, red onions, and cilantro",
     price: 18.99,
     emoji: "🍕",
-    image: "/src/assets/images/pizza.png",
+    image: pizzaImage,
     containsGluten: true,
     customizations: [
       { value: "thin", label: "Thin Crust", price: 0 },
@@ -113,7 +128,7 @@ export const foodItems = [
     description: "Ham, pineapple, and mozzarella cheese",
     price: 17.99,
     emoji: "🍕",
-    image: "/src/assets/images/pizza.png",
+    image: pizzaImage,
     containsGluten: true,
     customizations: [
       { value: "thin", label: "Thin Crust", price: 0 },
@@ -139,7 +154,7 @@ export const foodItems = [
       { value: "medium", label: "Medium" },
       { value: "well-done", label: "Well Done" },
     ],
-    image: "/src/assets/images/burger-classic.png",
+    image: burgerClassicImage,
   },
   {
     id: "burger-2",
@@ -149,7 +164,7 @@ export const foodItems = [
       "Beef patty with crispy bacon, cheddar cheese, and caramelized onions",
     price: 15.99,
     emoji: "🍔",
-    image: "/src/assets/images/burger-chicken.png",
+    image: burgerChickenImage,
     containsGluten: true,
     customizations: [
       { value: "rare", label: "Rare" },
@@ -212,7 +227,7 @@ export const foodItems = [
       "Al dente pasta with creamy sauce, pancetta, and parmesan cheese",
     price: 16.99,
     emoji: "🍝",
-    image: "/src/assets/images/noodles-ramen.png",
+    image: noodlesRamenImage,
     containsGluten: true,
     customizations: [
       { value: "al-dente", label: "Al Dente" },
@@ -228,7 +243,7 @@ export const foodItems = [
     price: 15.99,
     emoji: "🍝",
     badge: "Vegetarian",
-    image: "/src/assets/images/noodles-chowmein.png",
+    image: noodlesChowmeinImage,
     containsGluten: true,
     customizations: [
       { value: "al-dente", label: "Al Dente" },
@@ -373,8 +388,7 @@ export const foodItems = [
       { value: "diet", label: "Diet" },
       { value: "zero", label: "Zero Sugar" },
     ],
-    image:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop",
+    image: drinkColaImage,
   },
   {
     id: "drink-2",

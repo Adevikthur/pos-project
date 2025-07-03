@@ -6,6 +6,9 @@ import BasketItem from '../../components/BasketItem/BasketItem';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import Button from '../../components/Button/Button';
 
+// Import SVG icons
+import chevronBigDownIcon from '../../assets/icons/chevron_big_down.svg';
+
 const PageContainer = styled.div`
   min-height: 100vh;
   display: flex;
@@ -237,7 +240,7 @@ const Basket = ({
                   <InstructionsTitle>Special Instructions</InstructionsTitle>
                   <ToggleIcon 
                     isOpen={isInstructionsOpen} 
-                    src="/src/assets/icons/chevron_big_down.svg" 
+                    src={chevronBigDownIcon} 
                     alt="Toggle instructions"
                   />
                 </InstructionsHeader>

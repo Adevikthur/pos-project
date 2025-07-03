@@ -2,6 +2,9 @@ import { useState, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
+// Import SVG icons
+import chevronBigDownIcon from '../../assets/icons/chevron_big_down.svg';
+
 const Container = styled.div`
   position: relative;
   width: 100%;
@@ -157,7 +160,7 @@ const CustomizationDropdown = ({
         </SelectedText>
         <Arrow 
           isOpen={isOpen} 
-          src="/src/assets/icons/chevron_big_down.svg" 
+          src={chevronBigDownIcon} 
           alt="Toggle dropdown"
         />
       </SelectButton>
