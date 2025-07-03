@@ -55,7 +55,11 @@ const CategoryCard = styled.div`
   /* Mobile styles */
   width: 72px;
   height: 72px;
-  background-color: ${props => props.isSelected ? '#EC575C' : '#FF6F5D'};
+  background-color: ${props => {
+    if (props.isTemporarySelected) return '#D1454A';
+    if (props.isSelected) return '#EC575C';
+    return '#FF6F5D';
+  }};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,6 +79,7 @@ const CategoryCard = styled.div`
     justify-content: center;
     padding: 0;
     border: ${props => props.isSelected ? '3px solid #EC575C' : 'none'};
+    filter: ${props => props.isTemporarySelected ? 'brightness(0.8)' : 'none'};
   }
   
   &:hover {
@@ -82,10 +87,7 @@ const CategoryCard = styled.div`
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
   
-  &:focus-within {
-    outline: 2px solid #EC575C;
-    outline-offset: 2px;
-  }
+
 `;
 
 const DesktopCategoryCard = styled(CategoryCard)`
@@ -185,6 +187,7 @@ const ScrollIndicator = styled.div`
 const FoodCategory = ({ categories, selectedCategory, onCategorySelect }) => {
   const scrollContainerRef = useRef(null);
   const [showScrollIndicator, setShowScrollIndicator] = useState(false);
+  const [temporarySelectedId, setTemporarySelectedId] = useState(null);
 
   const handleScroll = () => {
     if (scrollContainerRef.current) {
@@ -203,6 +206,16 @@ const FoodCategory = ({ categories, selectedCategory, onCategorySelect }) => {
         behavior: 'smooth'
       });
     }
+  };
+
+  const handleCategoryClick = (category) => {
+    onCategorySelect(category);
+    setTemporarySelectedId(category.id);
+    
+    // Clear temporary selection after 1 second
+    setTimeout(() => {
+      setTemporarySelectedId(null);
+    }, 1000);
   };
 
   const getCategoryIcon = (categoryId) => {
@@ -239,17 +252,18 @@ const FoodCategory = ({ categories, selectedCategory, onCategorySelect }) => {
         {categories.map((category) => (
           <div key={category.id}>
             {/* Mobile: Icon container with title below */}
-            <MobileCategoryItem onClick={() => onCategorySelect(category)}>
+            <MobileCategoryItem onClick={() => handleCategoryClick(category)}>
               <CategoryCard
                 backgroundImage={getCategoryBackground(category.id)}
                 isSelected={selectedCategory?.id === category.id}
+                isTemporarySelected={temporarySelectedId === category.id}
                 tabIndex={0}
                 role="button"
                 aria-label={`Select ${category.name} category`}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    onCategorySelect(category);
+                    handleCategoryClick(category);
                   }
                 }}
               >
@@ -257,20 +271,22 @@ const FoodCategory = ({ categories, selectedCategory, onCategorySelect }) => {
                   <img src={getCategoryIcon(category.id)} alt={category.name} />
                 </CategoryIcon>
               </CategoryCard>
+              <MobileCategoryTitle>{category.name}</MobileCategoryTitle>
             </MobileCategoryItem>
             
             {/* Desktop: Full card with background and title */}
             <DesktopCategoryCard
               backgroundImage={getCategoryBackground(category.id)}
               isSelected={selectedCategory?.id === category.id}
-              onClick={() => onCategorySelect(category)}
+              isTemporarySelected={temporarySelectedId === category.id}
+              onClick={() => handleCategoryClick(category)}
               tabIndex={0}
               role="button"
               aria-label={`Select ${category.name} category`}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
-                  onCategorySelect(category);
+                  handleCategoryClick(category);
                 }
               }}
             >

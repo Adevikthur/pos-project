@@ -160,8 +160,13 @@ const AddressInstructions = styled.div`
 
 const PaymentMethodContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  gap: 16px;
+  flex-direction: column;
+  gap: 12px;
+  
+  @media (min-width: 768px) {
+    flex-direction: row;
+    gap: 16px;
+  }
 `;
 
 const PaymentOption = styled.label`
@@ -173,7 +178,11 @@ const PaymentOption = styled.label`
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
-  width: fit-content;
+  width: 100%;
+  
+  @media (min-width: 768px) {
+    width: fit-content;
+  }
   
   &:hover {
     border-color: #EC575C;
@@ -197,14 +206,19 @@ const PaymentIcon = styled.img`
 `;
 
 const MastercardIcon = styled.img`
-  width: 56px;
-  height: 30px;
+  width: 48px;
+  height: 26px;
   object-fit: contain;
+  
+  @media (min-width: 768px) {
+    width: 56px;
+    height: 30px;
+  }
 `;
 
 const VisaIcon = styled.img`
-  width: 56px;
-  height: 30px;
+  width: 48px;
+  height: 26px;
   object-fit: contain;
   
   @media (min-width: 768px) {
@@ -214,8 +228,8 @@ const VisaIcon = styled.img`
 `;
 
 const PayPalIcon = styled.img`
-  width: 96px;
-  height: 24px;
+  width: 80px;
+  height: 20px;
   object-fit: contain;
   
   @media (min-width: 768px) {
