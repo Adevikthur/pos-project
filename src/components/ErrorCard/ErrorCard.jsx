@@ -1,6 +1,9 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
+// Import error icon
+import errorCloseIcon from '../../assets/icons/error-close.svg';
+
 const CardContainer = styled.div`
   background-color: white;
   border: 1px solid #e5e7eb;
@@ -16,12 +19,14 @@ const CardContainer = styled.div`
   }
 `;
 
-const ErrorIcon = styled.div`
-  font-size: 64px;
+const ErrorIcon = styled.img`
+  width: 64px;
+  height: 64px;
   margin-bottom: 24px;
   
   @media (min-width: 768px) {
-    font-size: 80px;
+    width: 80px;
+    height: 80px;
   }
 `;
 
@@ -93,7 +98,7 @@ const ErrorCard = ({
 }) => {
   return (
     <CardContainer {...props}>
-      <ErrorIcon>❌</ErrorIcon>
+      <ErrorIcon src={errorCloseIcon} alt="Error" />
       
       <Title>{title}</Title>
       

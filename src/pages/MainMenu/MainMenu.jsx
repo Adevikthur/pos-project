@@ -37,23 +37,31 @@ const ContentWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+  
+  @media (min-width: 768px) {
+    padding: 0 32px;
+  }
 `;
 
 const CategorySection = styled.section`
   background-color: white;
   border-bottom: 1px solid #e5e7eb;
   padding: 16px 0;
+  margin: 0 -20px;
   
   @media (min-width: 768px) {
     padding: 24px 0;
+    margin: 0 -32px;
   }
 `;
 
 const FoodSection = styled.section`
-  padding: 24px 20px;
+  padding: 24px 0;
   
   @media (min-width: 768px) {
-    padding: 32px;
+    padding: 32px 0;
   }
 `;
 

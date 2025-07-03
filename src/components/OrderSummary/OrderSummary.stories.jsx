@@ -66,6 +66,9 @@ const manyItems = [
 export const Default = {
   args: {
     items: mockItems,
+    deliveryFee: 2.99,
+    deliveryTime: 'Sat, Nov 13 ∙ 3:00 - 3:30',
+    locationComments: 'This is a placeholder, so just leave it be',
   },
 };
 
@@ -78,12 +81,18 @@ export const Empty = {
 export const SingleItem = {
   args: {
     items: singleItem,
+    deliveryFee: 2.99,
+    deliveryTime: 'Today ∙ 2:00 - 2:30',
+    locationComments: 'This is a placeholder, so just leave it be',
   },
 };
 
 export const ManyItems = {
   args: {
     items: manyItems,
+    deliveryFee: 2.99,
+    deliveryTime: 'Sun, Nov 14 ∙ 4:00 - 4:30',
+    locationComments: 'This is a placeholder, so just leave it be',
   },
 };
 
@@ -91,13 +100,19 @@ export const WithoutCheckoutButton = {
   args: {
     items: mockItems,
     showCheckoutButton: false,
+    deliveryFee: 2.99,
+    deliveryTime: 'Sat, Nov 13 ∙ 3:00 - 3:30',
+    locationComments: 'This is a placeholder, so just leave it be',
   },
 };
 
-export const CustomCheckoutText = {
+export const PlaceOrder = {
   args: {
     items: mockItems,
     checkoutButtonText: 'Place Order',
+    deliveryFee: 2.99,
+    deliveryTime: 'Sat, Nov 13 ∙ 3:00 - 3:30',
+    locationComments: 'This is a placeholder, so just leave it be',
   },
 };
 
@@ -105,12 +120,27 @@ export const CustomTaxRate = {
   args: {
     items: mockItems,
     taxRate: 0.12,
+    deliveryFee: 2.99,
+    deliveryTime: 'Sat, Nov 13 ∙ 3:00 - 3:30',
+    locationComments: 'This is a placeholder, so just leave it be',
+  },
+};
+
+export const FreeDelivery = {
+  args: {
+    items: mockItems,
+    deliveryFee: 0,
+    deliveryTime: 'Sat, Nov 13 ∙ 3:00 - 3:30',
+    locationComments: 'This is a placeholder, so just leave it be',
   },
 };
 
 export const Mobile = {
   args: {
     items: mockItems,
+    deliveryFee: 2.99,
+    deliveryTime: 'Sat, Nov 13 ∙ 3:00 - 3:30',
+    locationComments: 'This is a placeholder, so just leave it be',
   },
   parameters: {
     viewport: {
@@ -122,6 +152,9 @@ export const Mobile = {
 export const Desktop = {
   args: {
     items: mockItems,
+    deliveryFee: 2.99,
+    deliveryTime: 'Sat, Nov 13 ∙ 3:00 - 3:30',
+    locationComments: 'This is a placeholder, so just leave it be',
   },
   parameters: {
     viewport: {

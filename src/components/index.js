@@ -33,3 +33,6 @@ export { default as SuccessCard } from "./SuccessCard/SuccessCard";
 
 // ErrorCard
 export { default as ErrorCard } from "./ErrorCard/ErrorCard";
+
+// ReceiptModal
+export { default as ReceiptModal } from "./ReceiptModal/ReceiptModal";

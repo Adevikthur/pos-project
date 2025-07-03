@@ -5,6 +5,11 @@ import Footer from '../../components/Footer/Footer';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import Button from '../../components/Button/Button';
 
+// Import payment icons
+import mastercardIcon from '../../assets/icons/master card.svg';
+import visaIcon from '../../assets/icons/visa.svg';
+import paypalIcon from '../../assets/icons/paypal.svg';
+
 const PageContainer = styled.div`
   min-height: 100vh;
   display: flex;
@@ -12,22 +17,41 @@ const PageContainer = styled.div`
   background-color: #f9fafb;
 `;
 
-const MainContent = styled.main`
-  flex: 1;
-  padding: 24px 20px;
+const EditButton = styled(Button)`
+  font-size: 16px;
+  padding: 12px 24px;
+  background-color: rgba(242, 5, 5, 0.1);
+  border: none;
+  white-space: nowrap;
+  width: 100%;
   
   @media (min-width: 768px) {
-    padding: 32px;
+    width: auto;
+    padding: 8px 24px;
+  }
+`;
+
+const MainContent = styled.main`
+  flex: 1;
+  padding: 16px;
+  
+  @media (min-width: 768px) {
+    padding: 16px;
   }
 `;
 
 const ContentWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
+  
 `;
 
 const MainContentGroup = styled.div`
-  max-width: 600px;
+  max-width: 100%;
+  
+  @media (min-width: 768px) {
+    max-width: 600px;
+  }
 `;
 
 const PageTitle = styled.h1`
@@ -55,6 +79,12 @@ const DeliveryLayout = styled.div`
 
 const DeliverySection = styled.div`
   flex: 1;
+  width: 100%;
+  
+  
+  @media (min-width: 768px) {
+    width: 600px;
+  }
 `;
 
 const SummarySection = styled.div`
@@ -87,18 +117,24 @@ const FormTitle = styled.h2`
 
 const AddressContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
   gap: 16px;
-  margin-bottom: 24px;
+  
+  
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
 `;
 
 const AddressInfo = styled.div`
   flex: 1;
-  padding: 20px;
+  padding: 16px;
   background-color: #f9fafb;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
+  height: fit-content;
 `;
 
 const AddressName = styled.div`
@@ -124,19 +160,20 @@ const AddressInstructions = styled.div`
 
 const PaymentMethodContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 16px;
 `;
 
 const PaymentOption = styled.label`
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
   padding: 16px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
+  width: fit-content;
   
   &:hover {
     border-color: #EC575C;
@@ -153,22 +190,52 @@ const PaymentRadio = styled.input`
   display: none;
 `;
 
-const PaymentIcon = styled.span`
-  font-size: 24px;
+const PaymentIcon = styled.img`
+  width: 60px;
+  height: 36px;
+  object-fit: contain;
+`;
+
+const MastercardIcon = styled.img`
+  width: 56px;
+  height: 30px;
+  object-fit: contain;
+`;
+
+const VisaIcon = styled.img`
+  width: 56px;
+  height: 30px;
+  object-fit: contain;
+  
+  @media (min-width: 768px) {
+    width: 96px;
+    height: 30px;
+  }
+`;
+
+const PayPalIcon = styled.img`
+  width: 96px;
+  height: 24px;
+  object-fit: contain;
+  
+  @media (min-width: 768px) {
+    width: 120px;
+    height: 30px;
+  }
 `;
 
 const PaymentText = styled.div`
-  flex: 1;
+  text-align: center;
 `;
 
 const PaymentTitle = styled.div`
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: #111827;
 `;
 
 const PaymentDescription = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   color: #6b7280;
   margin-top: 2px;
 `;
@@ -417,112 +484,87 @@ const DeliveryInfo = ({
                       </AddressInstructions>
                     )}
                   </AddressInfo>
-                  <Button
+                  <EditButton
                     variant="secondary"
                     onClick={handleOpenAddressModal}
-                    style={{ fontSize: '14px', padding: '8px 16px', whiteSpace: 'nowrap' }}
                   >
-                    Edit Address
-                  </Button>
+                    Edit
+                  </EditButton>
                 </AddressContainer>
               </FormContainer>
               
               <FormContainer>
                 <FormTitle>Payment Method</FormTitle>
                 <PaymentMethodContainer>
-                  {paymentMethod === 'card' ? (
+                  {paymentMethod === 'mastercard' ? (
                     <PaymentOptionSelected>
                       <PaymentRadio
                         type="radio"
                         name="paymentMethod"
-                        value="card"
-                        checked={paymentMethod === 'card'}
-                        onChange={() => handlePaymentMethodChange('card')}
+                        value="mastercard"
+                        checked={paymentMethod === 'mastercard'}
+                        onChange={() => handlePaymentMethodChange('mastercard')}
                       />
-                      <PaymentIcon>💳</PaymentIcon>
-                      <PaymentText>
-                        <PaymentTitle>Credit/Debit Card</PaymentTitle>
-                        <PaymentDescription>Pay securely with your card</PaymentDescription>
-                      </PaymentText>
+                      <MastercardIcon src={mastercardIcon} alt="Mastercard" />
                     </PaymentOptionSelected>
                   ) : (
                     <PaymentOption>
                       <PaymentRadio
                         type="radio"
                         name="paymentMethod"
-                        value="card"
-                        checked={paymentMethod === 'card'}
-                        onChange={() => handlePaymentMethodChange('card')}
+                        value="mastercard"
+                        checked={paymentMethod === 'mastercard'}
+                        onChange={() => handlePaymentMethodChange('mastercard')}
                       />
-                      <PaymentIcon>💳</PaymentIcon>
-                      <PaymentText>
-                        <PaymentTitle>Credit/Debit Card</PaymentTitle>
-                        <PaymentDescription>Pay securely with your card</PaymentDescription>
-                      </PaymentText>
+                      <MastercardIcon src={mastercardIcon} alt="Mastercard" />
                     </PaymentOption>
                   )}
                   
-                  {paymentMethod === 'cash' ? (
+                  {paymentMethod === 'visa' ? (
                     <PaymentOptionSelected>
                       <PaymentRadio
                         type="radio"
                         name="paymentMethod"
-                        value="cash"
-                        checked={paymentMethod === 'cash'}
-                        onChange={() => handlePaymentMethodChange('cash')}
+                        value="visa"
+                        checked={paymentMethod === 'visa'}
+                        onChange={() => handlePaymentMethodChange('visa')}
                       />
-                      <PaymentIcon>💵</PaymentIcon>
-                      <PaymentText>
-                        <PaymentTitle>Cash on Delivery</PaymentTitle>
-                        <PaymentDescription>Pay with cash when your order arrives</PaymentDescription>
-                      </PaymentText>
+                      <VisaIcon src={visaIcon} alt="Visa" />
                     </PaymentOptionSelected>
                   ) : (
                     <PaymentOption>
                       <PaymentRadio
                         type="radio"
                         name="paymentMethod"
-                        value="cash"
-                        checked={paymentMethod === 'cash'}
-                        onChange={() => handlePaymentMethodChange('cash')}
+                        value="visa"
+                        checked={paymentMethod === 'visa'}
+                        onChange={() => handlePaymentMethodChange('visa')}
                       />
-                      <PaymentIcon>💵</PaymentIcon>
-                      <PaymentText>
-                        <PaymentTitle>Cash on Delivery</PaymentTitle>
-                        <PaymentDescription>Pay with cash when your order arrives</PaymentDescription>
-                      </PaymentText>
+                      <VisaIcon src={visaIcon} alt="Visa" />
                     </PaymentOption>
                   )}
                   
-                  {paymentMethod === 'digital' ? (
+                  {paymentMethod === 'paypal' ? (
                     <PaymentOptionSelected>
                       <PaymentRadio
                         type="radio"
                         name="paymentMethod"
-                        value="digital"
-                        checked={paymentMethod === 'digital'}
-                        onChange={() => handlePaymentMethodChange('digital')}
+                        value="paypal"
+                        checked={paymentMethod === 'paypal'}
+                        onChange={() => handlePaymentMethodChange('paypal')}
                       />
-                      <PaymentIcon>📱</PaymentIcon>
-                      <PaymentText>
-                        <PaymentTitle>Digital Wallet</PaymentTitle>
-                        <PaymentDescription>Pay with Apple Pay, Google Pay, or PayPal</PaymentDescription>
-                      </PaymentText>
+                      <PayPalIcon src={paypalIcon} alt="PayPal" />
                     </PaymentOptionSelected>
                   ) : (
                     <PaymentOption>
                       <PaymentRadio
                         type="radio"
                         name="paymentMethod"
-                        value="digital"
-                        checked={paymentMethod === 'digital'}
-                        onChange={() => handlePaymentMethodChange('digital')}
+                        value="paypal"
+                        checked={paymentMethod === 'paypal'}
+                        onChange={() => handlePaymentMethodChange('paypal')}
                       />
-                      <PaymentIcon>📱</PaymentIcon>
-                      <PaymentText>
-                        <PaymentTitle>Digital Wallet</PaymentTitle>
-                        <PaymentDescription>Pay with Apple Pay, Google Pay, or PayPal</PaymentDescription>
-                      </PaymentText>
+                      <PayPalIcon src={paypalIcon} alt="PayPal" />
                     </PaymentOption>
                   )}
                 </PaymentMethodContainer>
@@ -536,6 +578,7 @@ const DeliveryInfo = ({
                 subtotal={subtotal}
                 tax={tax}
                 total={total}
+                deliveryFee={2.99}
                 onCheckout={handlePlaceOrder}
                 checkoutButtonText="Place Order"
                 showCheckoutButton={isFormValid}

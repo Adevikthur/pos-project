@@ -32,6 +32,7 @@ const App = () => {
   const [paymentMethod, setPaymentMethod] = useState('')
   const [orderNumber, setOrderNumber] = useState('')
   const [errorInfo, setErrorInfo] = useState({})
+  const [lastOrderData, setLastOrderData] = useState({})
 
   const handleAddToBasket = (item) => {
     setBasketItems(prev => [...prev, item])
@@ -71,6 +72,22 @@ const App = () => {
     // Simulate order processing
     console.log('Placing order:', orderData)
     
+    // Store order data for receipt
+    const orderSubtotal = basketItems.reduce((total, item) => total + (item.price * item.quantity), 0)
+    const orderTax = orderSubtotal * 0.08
+    const orderDeliveryFee = 2.99
+    const orderTotal = orderSubtotal + orderTax + orderDeliveryFee
+    
+    setLastOrderData({
+      items: [...basketItems],
+      subtotal: orderSubtotal,
+      tax: orderTax,
+      deliveryFee: orderDeliveryFee,
+      total: orderTotal,
+      deliveryAddress: deliveryInfo.address || 'Deliver to front desk',
+      paymentMethod: paymentMethod || 'Credit Card'
+    })
+    
     // Simulate success/failure
     const isSuccess = Math.random() > 0.1 // 90% success rate
     
@@ -95,9 +112,8 @@ const App = () => {
   }
 
   const handleViewReceipt = () => {
-    // In a real app, this would open a receipt modal or navigate to receipt page
+    // Receipt modal is now handled within the SuccessCard component
     console.log('Viewing receipt for order:', orderNumber)
-    alert(`Receipt for order ${orderNumber} would be displayed here.`)
   }
 
   const handleContinueShopping = () => {
@@ -158,6 +174,13 @@ const App = () => {
             onViewReceipt={handleViewReceipt}
             onContinueShopping={handleContinueShopping}
             onLogoClick={handleLogoClick}
+            orderItems={lastOrderData.items || []}
+            orderSubtotal={lastOrderData.subtotal || 0}
+            orderTax={lastOrderData.tax || 0}
+            orderDeliveryFee={lastOrderData.deliveryFee || 0}
+            orderTotal={lastOrderData.total || 0}
+            deliveryAddress={lastOrderData.deliveryAddress || 'Deliver to front desk'}
+            paymentMethod={lastOrderData.paymentMethod || 'Credit Card'}
           />
         )
       

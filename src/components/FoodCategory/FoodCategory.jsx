@@ -9,7 +9,6 @@ import noodlesIcon from '../../assets/icons/noodles.svg';
 import drinksIcon from '../../assets/icons/drinks.svg';
 import milkshakeIcon from '../../assets/icons/milkshake.svg';
 import roastChickenIcon from '../../assets/icons/roast-chicken.svg';
-import faderIcon from '../../assets/icons/Fader.svg';
 import shortLeftIcon from '../../assets/icons/short_left.svg';
 
 import pizzaImage from '../../assets/images/pizza.png';
@@ -22,6 +21,7 @@ import chickenImage from '../../assets/images/chicken.png';
 const CategoryContainer = styled.div`
   position: relative;
   margin: 0 20px;
+  overflow: hidden;
   
   @media (min-width: 768px) {
     margin: 0 32px;
@@ -151,21 +151,7 @@ const MobileCategoryTitle = styled.span`
   line-height: 1.2;
 `;
 
-const Fader = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 40px;
-  height: 100%;
-  background: linear-gradient(to right, transparent, white);
-  pointer-events: none;
-  z-index: 2;
-  display: ${props => props.show ? 'block' : 'none'};
-  
-  @media (min-width: 768px) {
-    width: 60px;
-  }
-`;
+
 
 const ScrollIndicator = styled.div`
   position: absolute;
@@ -198,7 +184,6 @@ const ScrollIndicator = styled.div`
 
 const FoodCategory = ({ categories, selectedCategory, onCategorySelect }) => {
   const scrollContainerRef = useRef(null);
-  const [showFader, setShowFader] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(false);
 
   const handleScroll = () => {
@@ -207,7 +192,6 @@ const FoodCategory = ({ categories, selectedCategory, onCategorySelect }) => {
       const isScrollable = scrollWidth > clientWidth;
       const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 1;
       
-      setShowFader(isScrollable && !isAtEnd);
       setShowScrollIndicator(isScrollable && !isAtEnd);
     }
   };
@@ -295,10 +279,6 @@ const FoodCategory = ({ categories, selectedCategory, onCategorySelect }) => {
           </div>
         ))}
       </CategoryScrollContainer>
-      
-      <Fader show={showFader}>
-        <img src={faderIcon} alt="" />
-      </Fader>
       
       <ScrollIndicator show={showScrollIndicator} onClick={handleScrollToEnd}>
         <img src={shortLeftIcon} alt="Scroll right" />

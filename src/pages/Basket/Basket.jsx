@@ -49,7 +49,7 @@ const BasketLayout = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
-  
+  width: 100%;
   @media (min-width: 1024px) {
     flex-direction: row;
     align-items: flex-start;
@@ -59,6 +59,8 @@ const BasketLayout = styled.div`
 
 const BasketSection = styled.div`
   flex: 1;
+  width: 100%;
+
 `;
 
 const SummarySection = styled.div`
@@ -81,7 +83,12 @@ const BasketItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
   margin-bottom: 32px;
+  
+  @media (min-width: 768px) {
+    width: 600px;
+  }
 `;
 
 const EmptyBasket = styled.div`
@@ -113,16 +120,17 @@ const EmptyText = styled.p`
 const SpecialInstructionsContainer = styled.div`
   background-color: white;
   border: 1px solid #e5e7eb;
-  border-radius: 12px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   padding: 24px;
-  margin-bottom: 32px;
 `;
 
 const InstructionsHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
   cursor: pointer;
 `;
 
@@ -270,6 +278,7 @@ const Basket = ({
                 subtotal={subtotal}
                 tax={tax}
                 total={total}
+                deliveryFee={0}
                 onCheckout={onCheckout}
                 checkoutButtonText="Proceed to Checkout"
               />

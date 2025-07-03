@@ -45,6 +45,7 @@ const ItemContent = styled.div`
   flex: 1;
   min-width: 0;
   display: flex;
+  width: 100%;
   flex-direction: column;
   gap: 8px;
 `;

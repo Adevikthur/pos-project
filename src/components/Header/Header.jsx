@@ -264,18 +264,21 @@ const MobileSearchOverlay = styled.div`
   display: ${props => props.isOpen ? 'flex' : 'none'};
   align-items: flex-start;
   justify-content: center;
-  padding-top: 80px;
+  padding: 16px;
+  padding-top: 100px;
+  box-sizing: border-box;
 `;
 
 const MobileSearchInput = styled.input`
-  width: 90%;
-  max-width: 400px;
+  width: 100%;
+  max-width: calc(100vw - 32px);
   padding: 16px 20px;
   border: none;
   border-radius: 12px;
   font-size: 16px;
   background-color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
   
   &:focus {
     outline: none;

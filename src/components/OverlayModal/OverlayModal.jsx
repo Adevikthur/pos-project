@@ -133,7 +133,7 @@ const FoodPrice = styled.div`
 `;
 
 const AddToBasketContainer = styled.div`
-  padding: 12px 120px;
+  padding: 12px 20px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -141,6 +141,10 @@ const AddToBasketContainer = styled.div`
   border-top: 1px solid #e5e7eb;
   background-color: white;
   border-radius: 0 0 12px 12px;
+  
+  @media (min-width: 768px) {
+    padding: 12px 120px;
+  }
 `;
 
 const AddToBasketButton = styled.button`

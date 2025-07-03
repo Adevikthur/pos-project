@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import SuccessCard from '../../components/SuccessCard/SuccessCard';
 
 const PageContainer = styled.div`
@@ -27,6 +26,13 @@ const Success = ({
   onViewReceipt,
   onContinueShopping,
   onLogoClick,
+  orderItems = [],
+  orderSubtotal = 0,
+  orderTax = 0,
+  orderDeliveryFee = 0,
+  orderTotal = 0,
+  deliveryAddress = 'Deliver to front desk',
+  paymentMethod = 'Credit Card',
 }) => {
   return (
     <PageContainer>
@@ -37,10 +43,15 @@ const Success = ({
           orderNumber={orderNumber}
           onViewReceipt={onViewReceipt}
           onContinueShopping={onContinueShopping}
+          orderItems={orderItems}
+          orderSubtotal={orderSubtotal}
+          orderTax={orderTax}
+          orderDeliveryFee={orderDeliveryFee}
+          orderTotal={orderTotal}
+          deliveryAddress={deliveryAddress}
+          paymentMethod={paymentMethod}
         />
       </MainContent>
-      
-      <Footer />
     </PageContainer>
   );
 };
