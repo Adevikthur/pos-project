@@ -14,8 +14,7 @@ const Overlay = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: 20px;
-  max-width: 100%;
+  padding: 0;
   
   @media (min-width: 768px) {
     padding: 40px;
@@ -24,15 +23,20 @@ const Overlay = styled.div`
 
 const ModalContent = styled.div`
   background-color: white;
-  border-radius: 12px;
-  max-width: 600px;
-  border-radius: 16px;
   width: 100%;
-  max-height: 90vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
   animation: slideIn 0.3s ease;
+  
+  @media (min-width: 768px) {
+    border-radius: 16px;
+    max-width: 600px;
+    max-height: 90vh;
+    width: 100%;
+    height: auto;
+  }
   
   @keyframes slideIn {
     from {
@@ -52,8 +56,8 @@ const CloseButton = styled.button`
   right: 16px;
   background-color: white;
   border: 1px solid #e5e7eb;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -62,6 +66,11 @@ const CloseButton = styled.button`
   transition: all 0.2s ease;
   z-index: 10;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  @media (min-width: 768px) {
+    width: 32px;
+    height: 32px;
+  }
   
   &:hover {
     background-color: #f3f4f6;
@@ -75,9 +84,14 @@ const CloseButton = styled.button`
   }
   
   svg {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     fill: #6b7280;
+    
+    @media (min-width: 768px) {
+      width: 16px;
+      height: 16px;
+    }
   }
 `;
 
@@ -94,11 +108,15 @@ const ModalScrollContainer = styled.div`
 
 const FoodImageContainer = styled.div`
   width: 100%;
-  height: 240px;
+  height: 300px;
   background-color: #f3f4f6;
-  border-radius: 12px 12px 0 0;
   overflow: hidden;
   position: relative;
+  
+  @media (min-width: 768px) {
+    height: 240px;
+    border-radius: 12px 12px 0 0;
+  }
   
   img {
     width: 100%;
@@ -108,7 +126,11 @@ const FoodImageContainer = styled.div`
 `;
 
 const FoodInfoContainer = styled.div`
-  padding: 24px;
+  padding: 20px;
+  
+  @media (min-width: 768px) {
+    padding: 24px;
+  }
 `;
 
 const FoodTitle = styled.h2`
@@ -133,17 +155,18 @@ const FoodPrice = styled.div`
 `;
 
 const AddToBasketContainer = styled.div`
-  padding: 12px 20px;
+  padding: 16px 20px;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid #e5e7eb;
   background-color: white;
-  border-radius: 0 0 12px 12px;
+  margin-top: auto;
   
   @media (min-width: 768px) {
     padding: 12px 120px;
+    border-radius: 0 0 12px 12px;
   }
 `;
 

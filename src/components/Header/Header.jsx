@@ -404,17 +404,17 @@ const Header = ({ basketCount = 0, onBasketClick, onLogoClick, onSearch }) => {
           </HeaderCenter>
           
           <HeaderRight>
+            
+            
+            <IconButton tabIndex={0} aria-label="Notifications">
+              <img src={notificationIcon} alt="Notifications" />
+            </IconButton>
             <IconButton onClick={onBasketClick} tabIndex={0} aria-label="View basket">
               <img src={shoppingBagIcon} alt="Shopping Bag" />
               {basketCount > 0 && (
                 <NotificationBadge>{basketCount}</NotificationBadge>
               )}
             </IconButton>
-            
-            <IconButton tabIndex={0} aria-label="Notifications">
-              <img src={notificationIcon} alt="Notifications" />
-            </IconButton>
-            
             <MobileSearchButton 
               onClick={handleMobileSearchToggle}
               tabIndex={0}
