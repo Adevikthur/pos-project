@@ -1,10 +1,21 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 import MainMenu from './pages/MainMenu/MainMenu'
 import Basket from './pages/Basket/Basket'
 import DeliveryInfo from './pages/DeliveryInfo/DeliveryInfo'
 import Success from './pages/Success/Success'
 import Error from './pages/Error/Error'
+import { 
+  saveBasketItems, 
+  loadBasketItems, 
+  saveDeliveryInfo, 
+  loadDeliveryInfo,
+  savePaymentMethod,
+  loadPaymentMethod,
+  saveSpecialInstructions,
+  loadSpecialInstructions,
+  clearAllSessionData
+} from './utils/sessionStorage'
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -33,6 +44,41 @@ const App = () => {
   const [orderNumber, setOrderNumber] = useState('')
   const [errorInfo, setErrorInfo] = useState({})
   const [lastOrderData, setLastOrderData] = useState({})
+
+  // Load session data on component mount
+  useEffect(() => {
+    const sessionData = {
+      basketItems: loadBasketItems(),
+      deliveryInfo: loadDeliveryInfo(),
+      paymentMethod: loadPaymentMethod(),
+      specialInstructions: loadSpecialInstructions(),
+    };
+
+    setBasketItems(sessionData.basketItems);
+    setDeliveryInfo(sessionData.deliveryInfo);
+    setPaymentMethod(sessionData.paymentMethod);
+    setSpecialInstructions(sessionData.specialInstructions);
+  }, []);
+
+  // Save basket items to session storage whenever they change
+  useEffect(() => {
+    saveBasketItems(basketItems);
+  }, [basketItems]);
+
+  // Save delivery info to session storage whenever it changes
+  useEffect(() => {
+    saveDeliveryInfo(deliveryInfo);
+  }, [deliveryInfo]);
+
+  // Save payment method to session storage whenever it changes
+  useEffect(() => {
+    savePaymentMethod(paymentMethod);
+  }, [paymentMethod]);
+
+  // Save special instructions to session storage whenever they change
+  useEffect(() => {
+    saveSpecialInstructions(specialInstructions);
+  }, [specialInstructions]);
 
   const handleAddToBasket = (item) => {
     setBasketItems(prev => [...prev, item])
@@ -96,7 +142,8 @@ const App = () => {
       setOrderNumber(newOrderNumber)
       setCurrentRoute(ROUTES.SUCCESS)
       
-      // Clear basket after successful order
+      // Clear all session data after successful order
+      clearAllSessionData()
       setBasketItems([])
       setSpecialInstructions('')
       setDeliveryInfo({})

@@ -3,15 +3,20 @@ import pizzaMargheritaImage from "../assets/images/pizza-margherita.png";
 import pizzaImage from "../assets/images/pizza.png";
 import burgerClassicImage from "../assets/images/burger-classic.png";
 import burgerChickenImage from "../assets/images/burger-chicken.png";
+import burgerImage from "../assets/images/burger.png";
 import noodlesRamenImage from "../assets/images/noodles-ramen.png";
 import noodlesChowmeinImage from "../assets/images/noodles-chowmein.png";
+import noodlesImage from "../assets/images/noodles.png";
 import chickenRoastImage from "../assets/images/chicken-roast.png";
 import chickenSaladImage from "../assets/images/chicken-salad.png";
 import chickenImage from "../assets/images/chicken.png";
 import dessertBrownieImage from "../assets/images/dessert-brownie.png";
 import dessertCheesecakeImage from "../assets/images/dessert-cheesecake.png";
+import dessertsImage from "../assets/images/desserts.png";
 import drinkColaImage from "../assets/images/drink-cola.png";
 import drinkMilkshakeImage from "../assets/images/drink-milkshake.png";
+import drinksImage from "../assets/images/drinks.png";
+import milkshakeImage from "../assets/images/milkshake.png";
 
 export const foodCategories = [
   {
@@ -96,7 +101,7 @@ export const foodItems = [
       "Loaded with pepperoni, sausage, mushrooms, bell peppers, and onions",
     price: 19.99,
     emoji: "🍕",
-    image: pizzaImage,
+    image: pizzaMargheritaImage,
     containsGluten: true,
     customizations: [
       { value: "thin", label: "Thin Crust", price: 0 },
@@ -112,7 +117,7 @@ export const foodItems = [
     description: "BBQ sauce, grilled chicken, red onions, and cilantro",
     price: 18.99,
     emoji: "🍕",
-    image: pizzaImage,
+    image: pizzaMargheritaImage,
     containsGluten: true,
     customizations: [
       { value: "thin", label: "Thin Crust", price: 0 },
@@ -128,7 +133,7 @@ export const foodItems = [
     description: "Ham, pineapple, and mozzarella cheese",
     price: 17.99,
     emoji: "🍕",
-    image: pizzaImage,
+    image: pizzaMargheritaImage,
     containsGluten: true,
     customizations: [
       { value: "thin", label: "Thin Crust", price: 0 },
@@ -164,7 +169,7 @@ export const foodItems = [
       "Beef patty with crispy bacon, cheddar cheese, and caramelized onions",
     price: 15.99,
     emoji: "🍔",
-    image: burgerChickenImage,
+    image: burgerClassicImage,
     containsGluten: true,
     customizations: [
       { value: "rare", label: "Rare" },
@@ -181,6 +186,7 @@ export const foodItems = [
     price: 13.99,
     emoji: "🍔",
     badge: "Vegetarian",
+    image: burgerImage,
     containsGluten: true,
     customizations: [
       { value: "grilled", label: "Grilled" },
@@ -194,6 +200,7 @@ export const foodItems = [
     description: "Beef patty with sautéed mushrooms and Swiss cheese",
     price: 14.99,
     emoji: "🍔",
+    image: burgerClassicImage,
     containsGluten: true,
     customizations: [
       { value: "rare", label: "Rare" },
@@ -209,6 +216,7 @@ export const foodItems = [
     description: "Two beef patties with double cheese and all the fixings",
     price: 18.99,
     emoji: "🍔",
+    image: burgerClassicImage,
     containsGluten: true,
     customizations: [
       { value: "rare", label: "Rare" },
@@ -259,6 +267,7 @@ export const foodItems = [
     price: 14.99,
     emoji: "🍝",
     badge: "Vegetarian",
+    image: noodlesImage,
     containsGluten: true,
     customizations: [
       { value: "al-dente", label: "Al Dente" },
@@ -273,6 +282,7 @@ export const foodItems = [
     description: "Fresh clams in white wine sauce with garlic and parsley",
     price: 18.99,
     emoji: "🍝",
+    image: noodlesRamenImage,
     containsGluten: true,
     customizations: [
       { value: "al-dente", label: "Al Dente" },
@@ -287,6 +297,7 @@ export const foodItems = [
     description: "Layers of pasta with rich meat sauce and melted cheese",
     price: 17.99,
     emoji: "🍝",
+    image: noodlesChowmeinImage,
     containsGluten: true,
     customizations: [
       { value: "al-dente", label: "Al Dente" },
@@ -305,6 +316,7 @@ export const foodItems = [
     price: 9.99,
     emoji: "🥗",
     badge: "Vegetarian",
+    image: chickenSaladImage,
     containsGluten: true,
     customizations: [
       { value: "light-dressing", label: "Light Dressing" },
@@ -321,6 +333,7 @@ export const foodItems = [
     price: 11.99,
     emoji: "🥗",
     badge: "Vegetarian",
+    image: chickenSaladImage,
     containsGluten: false,
     customizations: [
       { value: "light-dressing", label: "Light Dressing" },
@@ -336,6 +349,7 @@ export const foodItems = [
       "Mixed greens with chicken, bacon, eggs, avocado, and blue cheese",
     price: 13.99,
     emoji: "🥗",
+    image: chickenSaladImage,
     containsGluten: false,
     customizations: [
       { value: "light-dressing", label: "Light Dressing" },
@@ -351,6 +365,7 @@ export const foodItems = [
     price: 12.99,
     emoji: "🥗",
     badge: "Vegetarian",
+    image: chickenSaladImage,
     containsGluten: false,
     customizations: [
       { value: "light-dressing", label: "Light Dressing" },
@@ -366,6 +381,7 @@ export const foodItems = [
     price: 10.99,
     emoji: "🥗",
     badge: "Vegetarian",
+    image: chickenSaladImage,
     containsGluten: false,
     customizations: [
       { value: "light-dressing", label: "Light Dressing" },
@@ -398,6 +414,7 @@ export const foodItems = [
     price: 3.99,
     emoji: "🥤",
     badge: "Vegetarian",
+    image: drinksImage,
     containsGluten: false,
     customizations: [
       { value: "regular", label: "Regular" },
@@ -412,6 +429,7 @@ export const foodItems = [
     description: "Cold brewed coffee with cream and sugar",
     price: 4.99,
     emoji: "🥤",
+    image: drinksImage,
     containsGluten: false,
     customizations: [
       { value: "regular", label: "Regular" },
@@ -427,6 +445,7 @@ export const foodItems = [
     price: 8.99,
     emoji: "🥤",
     badge: "Vegetarian",
+    image: milkshakeImage,
     containsGluten: false,
     customizations: [
       { value: "acai", label: "Acai" },
@@ -442,6 +461,7 @@ export const foodItems = [
     price: 2.49,
     emoji: "🥤",
     badge: "Vegetarian",
+    image: drinksImage,
     containsGluten: false,
     customizations: [
       { value: "lime", label: "Lime" },
@@ -459,6 +479,7 @@ export const foodItems = [
     price: 8.99,
     emoji: "🍰",
     badge: "Vegetarian",
+    image: dessertBrownieImage,
     containsGluten: true,
     customizations: [
       { value: "vanilla-ice-cream", label: "Vanilla Ice Cream" },
@@ -474,6 +495,7 @@ export const foodItems = [
     price: 7.99,
     emoji: "🍰",
     badge: "Vegetarian",
+    image: dessertCheesecakeImage,
     containsGluten: true,
     customizations: [
       { value: "strawberry", label: "Strawberry" },
@@ -489,6 +511,7 @@ export const foodItems = [
       "Italian dessert with coffee-soaked ladyfingers and mascarpone",
     price: 9.99,
     emoji: "🍰",
+    image: dessertBrownieImage,
     containsGluten: true,
     customizations: [
       { value: "extra-coffee", label: "Extra Coffee" },
@@ -504,6 +527,7 @@ export const foodItems = [
     price: 6.99,
     emoji: "🍰",
     badge: "Vegetarian",
+    image: dessertCheesecakeImage,
     containsGluten: true,
     customizations: [
       { value: "vanilla-ice-cream", label: "Vanilla Ice Cream" },
@@ -519,6 +543,7 @@ export const foodItems = [
     price: 7.99,
     emoji: "🍰",
     badge: "Vegetarian",
+    image: dessertsImage,
     containsGluten: false,
     customizations: [
       { value: "chocolate-sauce", label: "Chocolate Sauce" },
