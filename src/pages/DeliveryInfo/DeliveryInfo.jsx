@@ -33,7 +33,7 @@ const EditButton = styled(Button)`
 
 const MainContent = styled.main`
   flex: 1;
-  padding: 16px;
+  padding: 12px;
   
   @media (min-width: 768px) {
     padding: 16px;
@@ -43,7 +43,6 @@ const MainContent = styled.main`
 const ContentWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  
 `;
 
 const MainContentGroup = styled.div`
@@ -55,32 +54,33 @@ const MainContentGroup = styled.div`
 `;
 
 const PageTitle = styled.h1`
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
   color: #111827;
-  margin: 0 0 32px 0;
+  margin: 0 0 24px 0;
   
   @media (min-width: 768px) {
     font-size: 36px;
+    margin: 0 0 32px 0;
   }
 `;
 
 const DeliveryLayout = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
   
   @media (min-width: 1024px) {
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
+    gap: 32px;
   }
 `;
 
 const DeliverySection = styled.div`
   flex: 1;
   width: 100%;
-  
   
   @media (min-width: 768px) {
     width: 600px;
@@ -100,68 +100,93 @@ const FormContainer = styled.div`
   background-color: white;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
-  padding: 24px;
-  margin-bottom: 24px;
+  padding: 16px;
+  margin-bottom: 20px;
   
   @media (min-width: 768px) {
     padding: 32px;
+    margin-bottom: 24px;
   }
 `;
 
 const FormTitle = styled.h2`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   color: #111827;
-  margin: 0 0 24px 0;
+  margin: 0 0 20px 0;
+  
+  @media (min-width: 768px) {
+    font-size: 20px;
+    margin: 0 0 24px 0;
+  }
 `;
 
 const AddressContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  
+  gap: 12px;
   
   @media (min-width: 768px) {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 16px;
   }
 `;
 
 const AddressInfo = styled.div`
   flex: 1;
-  padding: 16px;
+  padding: 12px;
   background-color: #f9fafb;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   height: fit-content;
+  
+  @media (min-width: 768px) {
+    padding: 16px;
+  }
 `;
 
 const AddressName = styled.div`
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
   color: #111827;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  
+  @media (min-width: 768px) {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
 `;
 
 const AddressDetails = styled.div`
   color: #6b7280;
   line-height: 1.5;
-  font-size: 14px;
+  font-size: 13px;
+  
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 const AddressInstructions = styled.div`
-  margin-top: 12px;
-  padding-top: 12px;
+  margin-top: 10px;
+  padding-top: 10px;
   border-top: 1px solid #e5e7eb;
-  font-size: 14px;
+  font-size: 13px;
   color: #6b7280;
+  
+  @media (min-width: 768px) {
+    margin-top: 12px;
+    padding-top: 12px;
+    font-size: 14px;
+  }
 `;
 
 const PaymentMethodContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   
   @media (min-width: 768px) {
     flex-direction: row;
@@ -173,7 +198,7 @@ const PaymentOption = styled.label`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
+  padding: 12px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   cursor: pointer;
@@ -182,6 +207,7 @@ const PaymentOption = styled.label`
   
   @media (min-width: 768px) {
     width: fit-content;
+    padding: 16px;
   }
   
   &:hover {
@@ -206,8 +232,8 @@ const PaymentIcon = styled.img`
 `;
 
 const MastercardIcon = styled.img`
-  width: 48px;
-  height: 26px;
+  width: 40px;
+  height: 22px;
   object-fit: contain;
   
   @media (min-width: 768px) {
@@ -217,8 +243,8 @@ const MastercardIcon = styled.img`
 `;
 
 const VisaIcon = styled.img`
-  width: 48px;
-  height: 26px;
+  width: 40px;
+  height: 22px;
   object-fit: contain;
   
   @media (min-width: 768px) {
@@ -228,8 +254,8 @@ const VisaIcon = styled.img`
 `;
 
 const PayPalIcon = styled.img`
-  width: 80px;
-  height: 20px;
+  width: 64px;
+  height: 16px;
   object-fit: contain;
   
   @media (min-width: 768px) {
@@ -267,7 +293,11 @@ const AddressModalOverlay = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: 20px;
+  padding: 16px;
+  
+  @media (min-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 const AddressModalContent = styled.div`
@@ -293,16 +323,25 @@ const AddressModalContent = styled.div`
 `;
 
 const AddressModalHeader = styled.div`
-  padding: 24px 24px 0 24px;
+  padding: 16px 16px 0 16px;
   border-bottom: 1px solid #e5e7eb;
   position: relative;
+  
+  @media (min-width: 768px) {
+    padding: 24px 24px 0 24px;
+  }
 `;
 
 const AddressModalTitle = styled.h2`
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   color: #111827;
-  margin: 0 0 24px 0;
+  margin: 0 0 20px 0;
+  
+  @media (min-width: 768px) {
+    font-size: 24px;
+    margin: 0 0 24px 0;
+  }
 `;
 
 const AddressModalCloseButton = styled.button`
@@ -329,33 +368,51 @@ const AddressModalCloseButton = styled.button`
 `;
 
 const AddressModalBody = styled.div`
-  padding: 24px;
+  padding: 16px;
+  
+  @media (min-width: 768px) {
+    padding: 24px;
+  }
 `;
 
 const AddressModalFooter = styled.div`
-  padding: 0 24px 24px 24px;
+  padding: 0 16px 16px 16px;
   display: flex;
-  gap: 12px;
+  gap: 10px;
+  
+  @media (min-width: 768px) {
+    padding: 0 24px 24px 24px;
+    gap: 12px;
+  }
 `;
 
 const FormField = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  
+  @media (min-width: 768px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const FormLabel = styled.label`
   display: block;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   color: #374151;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  
+  @media (min-width: 768px) {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
 `;
 
 const FormInput = styled.input`
   width: 100%;
-  padding: 12px 16px;
+  padding: 10px 14px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 14px;
   transition: border-color 0.2s ease;
   
   &:focus {
@@ -367,14 +424,19 @@ const FormInput = styled.input`
   &::placeholder {
     color: #9ca3af;
   }
+  
+  @media (min-width: 768px) {
+    padding: 12px 16px;
+    font-size: 16px;
+  }
 `;
 
 const FormSelect = styled.select`
   width: 100%;
-  padding: 12px 16px;
+  padding: 10px 14px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 14px;
   background-color: white;
   transition: border-color 0.2s ease;
   
@@ -383,12 +445,21 @@ const FormSelect = styled.select`
     outline-offset: 2px;
     border-color: #EC575C;
   }
+  
+  @media (min-width: 768px) {
+    padding: 12px 16px;
+    font-size: 16px;
+  }
 `;
 
 const FormGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 12px;
+  
+  @media (min-width: 768px) {
+    gap: 16px;
+  }
 `;
 
 const DeliveryInfo = ({ 

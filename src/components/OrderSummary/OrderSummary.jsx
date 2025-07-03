@@ -14,24 +14,29 @@ const SummaryContainer = styled.div`
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 20px;
+  gap: 20px;
+  padding: 16px;
   max-width: 100%;
   width: 100%;
   height: fit-content;
   box-sizing: border-box;
   
   @media (min-width: 768px) {
+    gap: 24px;
     padding: 32px;
     max-width: 440px;
   }
 `;
 
 const SummaryTitle = styled.h2`
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   color: #111827;
   margin: 0;
+  
+  @media (min-width: 768px) {
+    font-size: 24px;
+  }
 `;
 
 const DeliveryInfoGroup = styled.div`
@@ -71,13 +76,21 @@ const Divider = styled.hr`
 const PricingGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
+  
+  @media (min-width: 768px) {
+    gap: 20px;
+  }
 `;
 
 const PricingItems = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
+  
+  @media (min-width: 768px) {
+    gap: 16px;
+  }
 `;
 
 const PricingRow = styled.div`
@@ -87,14 +100,22 @@ const PricingRow = styled.div`
 `;
 
 const PricingLabel = styled.span`
-  font-size: 16px;
+  font-size: 14px;
   color: #374151;
+  
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const PricingValue = styled.span`
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   color: #111827;
+  
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const TotalRow = styled(PricingRow)`
@@ -102,15 +123,23 @@ const TotalRow = styled(PricingRow)`
 `;
 
 const TotalLabel = styled(PricingLabel)`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: #374151;
+  
+  @media (min-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 const TotalValue = styled(PricingValue)`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: #374151;
+  
+  @media (min-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 const CheckoutButton = styled.button`
@@ -119,15 +148,15 @@ const CheckoutButton = styled.button`
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 12px 16px;
-  font-size: 16px;
+  padding: 10px 16px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   
   &:hover {
     background-color: #d14a4f;
@@ -142,28 +171,52 @@ const CheckoutButton = styled.button`
     background-color: #9ca3af;
     cursor: not-allowed;
   }
+  
+  @media (min-width: 768px) {
+    padding: 12px 16px;
+    font-size: 16px;
+    gap: 8px;
+  }
 `;
 
 const ButtonIcon = styled.img`
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   filter: brightness(0) saturate(100%) invert(1);
+  
+  @media (min-width: 768px) {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const EmptyState = styled.div`
   text-align: center;
-  padding: 40px 20px;
+  padding: 32px 16px;
   color: #6b7280;
+  
+  @media (min-width: 768px) {
+    padding: 40px 20px;
+  }
 `;
 
 const EmptyIcon = styled.div`
-  font-size: 48px;
-  margin-bottom: 16px;
+  font-size: 40px;
+  margin-bottom: 12px;
+  
+  @media (min-width: 768px) {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
 `;
 
 const EmptyText = styled.p`
-  font-size: 16px;
+  font-size: 14px;
   margin: 0;
+  
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const OrderSummary = ({ 

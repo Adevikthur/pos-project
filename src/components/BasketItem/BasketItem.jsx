@@ -11,28 +11,35 @@ import chevronBigDownIcon from '../../assets/icons/chevron_big_down.svg';
 const ItemContainer = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 16px;
-  padding: 16px;
+  gap: 12px;
+  padding: 12px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   background-color: white;
   
   @media (min-width: 768px) {
+    gap: 16px;
     padding: 20px;
   }
 `;
 
 const ItemImage = styled.div`
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
   background-color: #f3f4f6;
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 20px;
   flex-shrink: 0;
   overflow: hidden;
+  
+  @media (min-width: 768px) {
+    width: 64px;
+    height: 64px;
+    font-size: 24px;
+  }
   
   img {
     width: 100%;
@@ -54,7 +61,7 @@ const ItemName = styled.h3`
   font-size: 16px;
   font-weight: 600;
   color: #111827;
-  margin: 0 0 8px 0;
+  margin: 0 0 4px 0;
   line-height: 1.3;
   
   @media (min-width: 768px) {
@@ -82,15 +89,19 @@ const ItemPrice = styled.div`
 const ItemActions = styled.div`
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   flex-shrink: 0;
+  
+  @media (min-width: 768px) {
+    gap: 12px;
+  }
 `;
 
 const QuantityDisplay = styled.span`
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   color: #374151;
-  min-width: 30px;
+  min-width: 24px;
   text-align: center;
   
   @media (min-width: 768px) {
@@ -103,12 +114,12 @@ const ActionButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border: 1px solid #e5e7eb;
   background-color: white;
   border-radius: 6px;
-  font-size: 16px;
+  font-size: 14px;
   color: #374151;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -140,10 +151,15 @@ const ActionButton = styled.button`
   }
   
   img {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     filter: brightness(0) saturate(100%) invert(47%) sepia(8%) saturate(1234%) hue-rotate(202deg) brightness(91%) contrast(86%);
     transition: filter 0.2s ease;
+    
+    @media (min-width: 768px) {
+      width: 16px;
+      height: 16px;
+    }
   }
   
   &:hover:not(:disabled) img {
@@ -168,10 +184,15 @@ const DeleteButton = styled(ActionButton)`
   }
   
   img {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     filter: brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
     transition: filter 0.2s ease;
+    
+    @media (min-width: 768px) {
+      width: 16px;
+      height: 16px;
+    }
   }
   
   &:hover:not(:disabled) img {
@@ -181,39 +202,66 @@ const DeleteButton = styled(ActionButton)`
 `;
 
 const SpecialInstructionsContainer = styled.div`
-  padding: 12px;
+  padding: 8px;
   border-top: 1px solid #e5e7eb;
   background-color: #F3F5F5;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  
+  @media (min-width: 768px) {
+    padding: 12px;
+  }
 `;
 
 const InstructionsHeader = styled.div`
   display: flex;
+  margin: 8px;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  padding: 8px 0;
+  padding: 0 0;
+  
+  @media (min-width: 768px) {
+    padding:  0;
+  }
 `;
 
 const InstructionsTitle = styled.span`
-  font-size: 14px;
+  font-size: 13px;
   color: #6b7280;
   font-weight: 500;
+  margin: 8px;
+  
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 const ChevronIcon = styled.img`
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   transition: transform 0.2s ease;
   transform: ${props => props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
   filter: brightness(0) saturate(100%) invert(47%) sepia(8%) saturate(1234%) hue-rotate(202deg) brightness(91%) contrast(86%);
+  
+  @media (min-width: 768px) {
+    width: 16px;
+    height: 16px;
+  }
 `;
 
 const InstructionsContent = styled.div`
-  font-size: 14px;
+  font-size: 13px;
   color: #374151;
   line-height: 1.4;
-  padding: 8px 0;
+  padding: 6px 0;
+  
+  @media (min-width: 768px) {
+    font-size: 14px;
+    padding: 8px 0;
+  }
 `;
 
 const BasketItem = ({ 

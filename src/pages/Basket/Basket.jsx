@@ -18,7 +18,7 @@ const PageContainer = styled.div`
 
 const MainContent = styled.main`
   flex: 1;
-  padding: 24px 20px;
+  padding: 16px 12px;
   
   @media (min-width: 768px) {
     padding: 32px;
@@ -35,25 +35,28 @@ const MainContentGroup = styled.div`
 `;
 
 const PageTitle = styled.h1`
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
   color: #111827;
-  margin: 0 0 32px 0;
+  margin: 0 0 24px 0;
   
   @media (min-width: 768px) {
     font-size: 36px;
+    margin: 0 0 32px 0;
   }
 `;
 
 const BasketLayout = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
   width: 100%;
+  
   @media (min-width: 1024px) {
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
+    gap: 32px;
   }
 `;
 
@@ -73,21 +76,28 @@ const SummarySection = styled.div`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   color: #111827;
-  margin: 0 0 16px 0;
+  margin: 0 0 12px 0;
+  
+  @media (min-width: 768px) {
+    font-size: 20px;
+    margin: 0 0 16px 0;
+  }
 `;
 
 const BasketItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   width: 100%;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   
   @media (min-width: 768px) {
+    gap: 16px;
     width: 600px;
+    margin-bottom: 32px;
   }
 `;
 
@@ -123,8 +133,13 @@ const SpecialInstructionsContainer = styled.div`
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 24px;
+  gap: 6px;
+  padding: 16px;
+  
+  @media (min-width: 768px) {
+    gap: 8px;
+    padding: 24px;
+  }
 `;
 
 const InstructionsHeader = styled.div`
@@ -135,33 +150,48 @@ const InstructionsHeader = styled.div`
 `;
 
 const InstructionsTitle = styled.h3`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #111827;
   margin: 0;
+  
+  @media (min-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 const ToggleIcon = styled.img`
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   transition: transform 0.2s ease;
   transform: ${props => props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
   filter: brightness(0) saturate(100%) invert(47%) sepia(8%) saturate(1234%) hue-rotate(202deg) brightness(91%) contrast(86%);
+  
+  @media (min-width: 768px) {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const InstructionsTextarea = styled.textarea`
   width: 100%;
-  min-height: 100px;
-  padding: 12px;
+  min-height: 80px;
+  padding: 10px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 14px;
   font-family: inherit;
   resize: vertical;
   
   &:focus {
     outline: 2px solid #EC575C;
     outline-offset: 2px;
+  }
+  
+  @media (min-width: 768px) {
+    min-height: 100px;
+    padding: 12px;
+    font-size: 16px;
   }
 `;
 
