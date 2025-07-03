@@ -4,7 +4,6 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import Button from '../../components/Button/Button';
-import OverlayModal from '../../components/OverlayModal/OverlayModal';
 
 const PageContainer = styled.div`
   min-height: 100vh;
@@ -27,6 +26,10 @@ const ContentWrapper = styled.div`
   margin: 0 auto;
 `;
 
+const MainContentGroup = styled.div`
+  max-width: 600px;
+`;
+
 const PageTitle = styled.h1`
   font-size: 28px;
   font-weight: 600;
@@ -46,22 +49,20 @@ const DeliveryLayout = styled.div`
   @media (min-width: 1024px) {
     flex-direction: row;
     align-items: flex-start;
+    justify-content: space-between;
   }
 `;
 
 const DeliverySection = styled.div`
   flex: 1;
-  
-  @media (min-width: 1024px) {
-    max-width: 60%;
-  }
 `;
 
 const SummarySection = styled.div`
   @media (min-width: 1024px) {
-    max-width: 40%;
+    width: 40%;
     position: sticky;
     top: 100px;
+    align-self: flex-start;
   }
 `;
 
@@ -84,66 +85,41 @@ const FormTitle = styled.h2`
   margin: 0 0 24px 0;
 `;
 
-const FormGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`;
-
-const FormField = styled.div`
+const AddressContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
 `;
 
-const FieldLabel = styled.label`
+const AddressInfo = styled.div`
+  flex: 1;
+  padding: 20px;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+`;
+
+const AddressName = styled.div`
+  font-weight: 600;
+  font-size: 16px;
+  color: #111827;
+  margin-bottom: 8px;
+`;
+
+const AddressDetails = styled.div`
+  color: #6b7280;
+  line-height: 1.5;
   font-size: 14px;
-  font-weight: 500;
-  color: #374151;
 `;
 
-const FieldInput = styled.input`
-  padding: 12px 16px;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  font-size: 16px;
-  transition: border-color 0.2s ease;
-  
-  &:focus {
-    outline: 2px solid #EC575C;
-    outline-offset: 2px;
-    border-color: #EC575C;
-  }
-  
-  &::placeholder {
-    color: #9ca3af;
-  }
-`;
-
-const FieldSelect = styled.select`
-  padding: 12px 16px;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  font-size: 16px;
-  background-color: white;
-  cursor: pointer;
-  transition: border-color 0.2s ease;
-  
-  &:focus {
-    outline: 2px solid #EC575C;
-    outline-offset: 2px;
-    border-color: #EC575C;
-  }
-`;
-
-const FullWidthField = styled(FormField)`
-  @media (min-width: 768px) {
-    grid-column: span 2;
-  }
+const AddressInstructions = styled.div`
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 14px;
+  color: #6b7280;
 `;
 
 const PaymentMethodContainer = styled.div`
@@ -197,6 +173,143 @@ const PaymentDescription = styled.div`
   margin-top: 2px;
 `;
 
+// Address Modal Styles
+const AddressModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+`;
+
+const AddressModalContent = styled.div`
+  background-color: white;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideIn 0.3s ease;
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+
+const AddressModalHeader = styled.div`
+  padding: 24px 24px 0 24px;
+  border-bottom: 1px solid #e5e7eb;
+  position: relative;
+`;
+
+const AddressModalTitle = styled.h2`
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 24px 0;
+`;
+
+const AddressModalCloseButton = styled.button`
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #6b7280;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: #f3f4f6;
+    color: #374151;
+  }
+`;
+
+const AddressModalBody = styled.div`
+  padding: 24px;
+`;
+
+const AddressModalFooter = styled.div`
+  padding: 0 24px 24px 24px;
+  display: flex;
+  gap: 12px;
+`;
+
+const FormField = styled.div`
+  margin-bottom: 20px;
+`;
+
+const FormLabel = styled.label`
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 8px;
+`;
+
+const FormInput = styled.input`
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s ease;
+  
+  &:focus {
+    outline: 2px solid #EC575C;
+    outline-offset: 2px;
+    border-color: #EC575C;
+  }
+  
+  &::placeholder {
+    color: #9ca3af;
+  }
+`;
+
+const FormSelect = styled.select`
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: white;
+  transition: border-color 0.2s ease;
+  
+  &:focus {
+    outline: 2px solid #EC575C;
+    outline-offset: 2px;
+    border-color: #EC575C;
+  }
+`;
+
+const FormGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+`;
+
 const DeliveryInfo = ({ 
   basketItems = [], 
   onPlaceOrder,
@@ -207,39 +320,29 @@ const DeliveryInfo = ({
   paymentMethod = '',
   onPaymentMethodChange,
 }) => {
-  const [formData, setFormData] = useState({
-    firstName: deliveryInfo.firstName || '',
-    lastName: deliveryInfo.lastName || '',
-    email: deliveryInfo.email || '',
-    phone: deliveryInfo.phone || '',
-    address: deliveryInfo.address || '',
-    city: deliveryInfo.city || '',
-    state: deliveryInfo.state || '',
-    zipCode: deliveryInfo.zipCode || '',
-    deliveryInstructions: deliveryInfo.deliveryInstructions || '',
+  // Updated mockup data
+  const defaultAddress = {
+    firstName: 'Dupe',
+    lastName: 'Thompson',
+    address: '3543, Garki',
+    city: 'Abuja',
+    state: 'NY',
+    zipCode: '10001',
+    deliveryInstructions: 'Please ring doorbell and leave at front door',
+  };
+
+  const [currentAddress, setCurrentAddress] = useState({
+    ...defaultAddress,
+    ...deliveryInfo
   });
   
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
-  const [addressFormData, setAddressFormData] = useState({
-    address: formData.address || '',
-    city: formData.city || '',
-    state: formData.state || '',
-    zipCode: formData.zipCode || '',
-    deliveryInstructions: formData.deliveryInstructions || '',
-  });
+  const [addressFormData, setAddressFormData] = useState(currentAddress);
 
   const subtotal = basketItems.reduce((total, item) => total + (item.price * item.quantity), 0);
   const tax = subtotal * 0.08;
   const deliveryFee = 3.99;
   const total = subtotal + tax + deliveryFee;
-
-  const handleInputChange = (field, value) => {
-    const newFormData = { ...formData, [field]: value };
-    setFormData(newFormData);
-    if (onDeliveryInfoChange) {
-      onDeliveryInfoChange(newFormData);
-    }
-  };
 
   const handlePaymentMethodChange = (method) => {
     if (onPaymentMethodChange) {
@@ -250,7 +353,7 @@ const DeliveryInfo = ({
   const handlePlaceOrder = () => {
     if (onPlaceOrder) {
       onPlaceOrder({
-        deliveryInfo: formData,
+        deliveryInfo: currentAddress,
         paymentMethod,
         orderTotal: total,
       });
@@ -258,13 +361,7 @@ const DeliveryInfo = ({
   };
 
   const handleOpenAddressModal = () => {
-    setAddressFormData({
-      address: formData.address || '',
-      city: formData.city || '',
-      state: formData.state || '',
-      zipCode: formData.zipCode || '',
-      deliveryInstructions: formData.deliveryInstructions || '',
-    });
+    setAddressFormData(currentAddress);
     setIsAddressModalOpen(true);
   };
 
@@ -277,17 +374,21 @@ const DeliveryInfo = ({
   };
 
   const handleSaveAddress = () => {
-    const newFormData = { ...formData, ...addressFormData };
-    setFormData(newFormData);
+    const newAddress = { ...addressFormData };
+    setCurrentAddress(newAddress);
     if (onDeliveryInfoChange) {
-      onDeliveryInfoChange(newFormData);
+      onDeliveryInfoChange(newAddress);
     }
     setIsAddressModalOpen(false);
   };
 
-  const isFormValid = formData.firstName && formData.lastName && formData.email && 
-                     formData.phone && formData.address && formData.city && 
-                     formData.state && formData.zipCode && paymentMethod;
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      handleCloseAddressModal();
+    }
+  };
+
+  const isFormValid = paymentMethod;
 
   return (
     <PageContainer>
@@ -295,109 +396,35 @@ const DeliveryInfo = ({
       
       <MainContent>
         <ContentWrapper>
-          <PageTitle>Delivery Information</PageTitle>
-          
           <DeliveryLayout>
-            <DeliverySection>
-              <FormContainer>
-                <FormTitle>Contact Information</FormTitle>
-                <FormGrid>
-                  <FormField>
-                    <FieldLabel htmlFor="firstName">First Name *</FieldLabel>
-                    <FieldInput
-                      id="firstName"
-                      type="text"
-                      value={formData.firstName}
-                      onChange={(e) => handleInputChange('firstName', e.target.value)}
-                      placeholder="Enter your first name"
-                      required
-                    />
-                  </FormField>
-                  
-                  <FormField>
-                    <FieldLabel htmlFor="lastName">Last Name *</FieldLabel>
-                    <FieldInput
-                      id="lastName"
-                      type="text"
-                      value={formData.lastName}
-                      onChange={(e) => handleInputChange('lastName', e.target.value)}
-                      placeholder="Enter your last name"
-                      required
-                    />
-                  </FormField>
-                  
-                  <FormField>
-                    <FieldLabel htmlFor="email">Email Address *</FieldLabel>
-                    <FieldInput
-                      id="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
-                      placeholder="Enter your email address"
-                      required
-                    />
-                  </FormField>
-                  
-                  <FormField>
-                    <FieldLabel htmlFor="phone">Phone Number *</FieldLabel>
-                    <FieldInput
-                      id="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => handleInputChange('phone', e.target.value)}
-                      placeholder="Enter your phone number"
-                      required
-                    />
-                  </FormField>
-                </FormGrid>
-              </FormContainer>
+            <MainContentGroup>
+              <PageTitle>Delivery Information</PageTitle>
               
+              <DeliverySection>
               <FormContainer>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-                  <FormTitle>Delivery Address</FormTitle>
+                <AddressContainer>
+                  <AddressInfo>
+                    <AddressName>
+                      {currentAddress.firstName} {currentAddress.lastName}
+                    </AddressName>
+                    <AddressDetails>
+                      {currentAddress.address}<br />
+                      {currentAddress.city}, {currentAddress.state} {currentAddress.zipCode}
+                    </AddressDetails>
+                    {currentAddress.deliveryInstructions && (
+                      <AddressInstructions>
+                        <strong>Instructions:</strong> {currentAddress.deliveryInstructions}
+                      </AddressInstructions>
+                    )}
+                  </AddressInfo>
                   <Button
                     variant="secondary"
                     onClick={handleOpenAddressModal}
-                    style={{ fontSize: '14px', padding: '8px 16px' }}
+                    style={{ fontSize: '14px', padding: '8px 16px', whiteSpace: 'nowrap' }}
                   >
-                    {formData.address ? 'Edit Address' : 'Add Address'}
+                    Edit Address
                   </Button>
-                </div>
-                
-                {formData.address ? (
-                  <div style={{ 
-                    padding: '16px', 
-                    backgroundColor: '#f9fafb', 
-                    border: '1px solid #e5e7eb', 
-                    borderRadius: '8px',
-                    marginBottom: '16px'
-                  }}>
-                    <div style={{ fontWeight: '500', marginBottom: '8px' }}>
-                      {formData.firstName} {formData.lastName}
-                    </div>
-                    <div style={{ color: '#6b7280', lineHeight: '1.5' }}>
-                      {formData.address}<br />
-                      {formData.city}, {formData.state} {formData.zipCode}
-                      {formData.deliveryInstructions && (
-                        <>
-                          <br />
-                          <strong>Instructions:</strong> {formData.deliveryInstructions}
-                        </>
-                      )}
-                    </div>
-                  </div>
-                ) : (
-                  <div style={{ 
-                    padding: '16px', 
-                    backgroundColor: '#fef7f7', 
-                    border: '1px solid #fecaca', 
-                    borderRadius: '8px',
-                    color: '#dc2626',
-                    textAlign: 'center'
-                  }}>
-                    No delivery address set. Please add an address to continue.
-                  </div>
-                )}
+                </AddressContainer>
               </FormContainer>
               
               <FormContainer>
@@ -501,6 +528,7 @@ const DeliveryInfo = ({
                 </PaymentMethodContainer>
               </FormContainer>
             </DeliverySection>
+            </MainContentGroup>
             
             <SummarySection>
               <OrderSummary
@@ -519,143 +547,124 @@ const DeliveryInfo = ({
       
       <Footer />
       
-      <OverlayModal 
-        isOpen={isAddressModalOpen} 
-        onClose={handleCloseAddressModal}
-      >
-        <div style={{ padding: '24px', maxWidth: '500px', width: '100%' }}>
-          <h2 style={{ margin: '0 0 24px 0', fontSize: '24px', fontWeight: '600' }}>
-            {formData.address ? 'Edit Delivery Address' : 'Add Delivery Address'}
-          </h2>
-          
-          <div style={{ display: 'grid', gap: '20px', marginBottom: '32px' }}>
-            <div>
-              <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', marginBottom: '8px' }}>
-                Street Address *
-              </label>
-              <input
-                type="text"
-                value={addressFormData.address}
-                onChange={(e) => handleAddressFormChange('address', e.target.value)}
-                placeholder="Enter your street address"
-                style={{
-                  width: '100%',
-                  padding: '12px 16px',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '8px',
-                  fontSize: '16px'
-                }}
-                required
-              />
-            </div>
+      {/* Custom Address Modal */}
+      {isAddressModalOpen && (
+        <AddressModalOverlay onClick={handleOverlayClick}>
+          <AddressModalContent>
+            <AddressModalHeader>
+              <AddressModalTitle>Edit Delivery Address</AddressModalTitle>
+              <AddressModalCloseButton onClick={handleCloseAddressModal}>
+                ×
+              </AddressModalCloseButton>
+            </AddressModalHeader>
             
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-              <div>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', marginBottom: '8px' }}>
-                  City *
-                </label>
-                <input
+            <AddressModalBody>
+              <FormGrid>
+                <FormField>
+                  <FormLabel>First Name *</FormLabel>
+                  <FormInput
+                    type="text"
+                    value={addressFormData.firstName}
+                    onChange={(e) => handleAddressFormChange('firstName', e.target.value)}
+                    placeholder="Enter first name"
+                    required
+                  />
+                </FormField>
+                
+                <FormField>
+                  <FormLabel>Last Name *</FormLabel>
+                  <FormInput
+                    type="text"
+                    value={addressFormData.lastName}
+                    onChange={(e) => handleAddressFormChange('lastName', e.target.value)}
+                    placeholder="Enter last name"
+                    required
+                  />
+                </FormField>
+              </FormGrid>
+              
+              <FormField>
+                <FormLabel>Street Address *</FormLabel>
+                <FormInput
                   type="text"
-                  value={addressFormData.city}
-                  onChange={(e) => handleAddressFormChange('city', e.target.value)}
-                  placeholder="Enter your city"
-                  style={{
-                    width: '100%',
-                    padding: '12px 16px',
-                    border: '1px solid #e5e7eb',
-                    borderRadius: '8px',
-                    fontSize: '16px'
-                  }}
+                  value={addressFormData.address}
+                  onChange={(e) => handleAddressFormChange('address', e.target.value)}
+                  placeholder="Enter your street address"
                   required
                 />
-              </div>
+              </FormField>
               
-              <div>
-                <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', marginBottom: '8px' }}>
-                  State *
-                </label>
-                <select
-                  value={addressFormData.state}
-                  onChange={(e) => handleAddressFormChange('state', e.target.value)}
-                  style={{
-                    width: '100%',
-                    padding: '12px 16px',
-                    border: '1px solid #e5e7eb',
-                    borderRadius: '8px',
-                    fontSize: '16px',
-                    backgroundColor: 'white'
-                  }}
+              <FormGrid>
+                <FormField>
+                  <FormLabel>City *</FormLabel>
+                  <FormInput
+                    type="text"
+                    value={addressFormData.city}
+                    onChange={(e) => handleAddressFormChange('city', e.target.value)}
+                    placeholder="Enter your city"
+                    required
+                  />
+                </FormField>
+                
+                <FormField>
+                  <FormLabel>State *</FormLabel>
+                  <FormSelect
+                    value={addressFormData.state}
+                    onChange={(e) => handleAddressFormChange('state', e.target.value)}
+                    required
+                  >
+                    <option value="">Select State</option>
+                    <option value="CA">California</option>
+                    <option value="NY">New York</option>
+                    <option value="TX">Texas</option>
+                    <option value="FL">Florida</option>
+                    <option value="IL">Illinois</option>
+                  </FormSelect>
+                </FormField>
+              </FormGrid>
+              
+              <FormField>
+                <FormLabel>ZIP Code *</FormLabel>
+                <FormInput
+                  type="text"
+                  value={addressFormData.zipCode}
+                  onChange={(e) => handleAddressFormChange('zipCode', e.target.value)}
+                  placeholder="Enter ZIP code"
                   required
-                >
-                  <option value="">Select State</option>
-                  <option value="CA">California</option>
-                  <option value="NY">New York</option>
-                  <option value="TX">Texas</option>
-                  <option value="FL">Florida</option>
-                  <option value="IL">Illinois</option>
-                </select>
-              </div>
-            </div>
+                />
+              </FormField>
+              
+              <FormField>
+                <FormLabel>Delivery Instructions</FormLabel>
+                <FormInput
+                  type="text"
+                  value={addressFormData.deliveryInstructions}
+                  onChange={(e) => handleAddressFormChange('deliveryInstructions', e.target.value)}
+                  placeholder="Any special delivery instructions (optional)"
+                />
+              </FormField>
+            </AddressModalBody>
             
-            <div>
-              <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', marginBottom: '8px' }}>
-                ZIP Code *
-              </label>
-              <input
-                type="text"
-                value={addressFormData.zipCode}
-                onChange={(e) => handleAddressFormChange('zipCode', e.target.value)}
-                placeholder="Enter ZIP code"
-                style={{
-                  width: '100%',
-                  padding: '12px 16px',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '8px',
-                  fontSize: '16px'
-                }}
-                required
-              />
-            </div>
-            
-            <div>
-              <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', marginBottom: '8px' }}>
-                Delivery Instructions
-              </label>
-              <input
-                type="text"
-                value={addressFormData.deliveryInstructions}
-                onChange={(e) => handleAddressFormChange('deliveryInstructions', e.target.value)}
-                placeholder="Any special delivery instructions (optional)"
-                style={{
-                  width: '100%',
-                  padding: '12px 16px',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '8px',
-                  fontSize: '16px'
-                }}
-              />
-            </div>
-          </div>
-          
-          <div style={{ display: 'flex', gap: '12px' }}>
-            <Button
-              variant="secondary"
-              onClick={handleCloseAddressModal}
-              style={{ flex: 1 }}
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="primary"
-              onClick={handleSaveAddress}
-              style={{ flex: 1 }}
-              disabled={!addressFormData.address || !addressFormData.city || !addressFormData.state || !addressFormData.zipCode}
-            >
-              Save Address
-            </Button>
-          </div>
-        </div>
-      </OverlayModal>
+            <AddressModalFooter>
+              <Button
+                variant="secondary"
+                onClick={handleCloseAddressModal}
+                style={{ flex: 1 }}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="primary"
+                onClick={handleSaveAddress}
+                style={{ flex: 1 }}
+                disabled={!addressFormData.firstName || !addressFormData.lastName || !addressFormData.address || !addressFormData.city || !addressFormData.state || !addressFormData.zipCode}
+              >
+                Save Address
+              </Button>
+            </AddressModalFooter>
+          </AddressModalContent>
+        </AddressModalOverlay>
+      )}
     </PageContainer>
   );
 };

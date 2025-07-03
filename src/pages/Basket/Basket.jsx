@@ -30,6 +30,10 @@ const ContentWrapper = styled.div`
   margin: 0 auto;
 `;
 
+const MainContentGroup = styled.div`
+  max-width: 600px;
+`;
+
 const PageTitle = styled.h1`
   font-size: 28px;
   font-weight: 600;
@@ -49,22 +53,20 @@ const BasketLayout = styled.div`
   @media (min-width: 1024px) {
     flex-direction: row;
     align-items: flex-start;
+    justify-content: space-between;
   }
 `;
 
 const BasketSection = styled.div`
   flex: 1;
-  
-  @media (min-width: 1024px) {
-    max-width: 60%;
-  }
 `;
 
 const SummarySection = styled.div`
   @media (min-width: 1024px) {
-    max-width: 40%;
+    width: 40%;
     position: sticky;
     top: 100px;
+    align-self: flex-start;
   }
 `;
 
@@ -218,10 +220,11 @@ const Basket = ({
       
       <MainContent>
         <ContentWrapper>
-          <PageTitle>Your Basket</PageTitle>
-          
           <BasketLayout>
-            <BasketSection>
+            <MainContentGroup>
+              <PageTitle>Your Basket</PageTitle>
+              
+              <BasketSection>
               <SectionTitle>Order Items</SectionTitle>
               
               <BasketItemsContainer>
@@ -259,6 +262,7 @@ const Basket = ({
                 )}
               </SpecialInstructionsContainer>
             </BasketSection>
+            </MainContentGroup>
             
             <SummarySection>
               <OrderSummary
