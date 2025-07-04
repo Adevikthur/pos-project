@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import logoImage from '../../../dist/onepot-logo.svg';
+import logoImage from '/one-pot-main.svg';
 
 const FooterContainer = styled.footer`
   background-color: #F3F5F5;

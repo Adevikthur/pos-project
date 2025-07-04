@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
 // Import images and icons
-import logoImage from '../../../dist/onepot-logo-red.svg';
+import logoImage from '/onepot-logo-red.svg';
 import scooterIcon from '../../assets/icons/scooter.svg';
 import diningMealIcon from '../../assets/icons/dining-meal-covered 1.svg';
 import takeawayIcon from '../../assets/icons/take-away.svg';
