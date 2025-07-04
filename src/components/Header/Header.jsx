@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
 // Import images and icons
-import logoImage from '../../assets/images/logo@2x.png';
+import logoImage from '../../../dist/onepot-logo-red.svg';
 import scooterIcon from '../../assets/icons/scooter.svg';
 import diningMealIcon from '../../assets/icons/dining-meal-covered 1.svg';
 import takeawayIcon from '../../assets/icons/take-away.svg';
@@ -354,7 +354,7 @@ const Header = ({ basketCount = 0, onBasketClick, onLogoClick, onSearch }) => {
       <HeaderContainer>
         <HeaderContent>
           <Logo onClick={onLogoClick} tabIndex={0} role="button" aria-label="Go to home">
-            <img src={logoImage} alt="POS System Logo" />
+            <img src={logoImage} alt="OnePot Kitchen Logo" />
           </Logo>
           
           <HeaderCenter>

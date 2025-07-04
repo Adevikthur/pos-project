@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import logoImage from '../../assets/images/logo@2x.png';
+import logoImage from '../../../dist/onepot-logo.svg';
 
 const FooterContainer = styled.footer`
   background-color: #F3F5F5;
@@ -150,7 +150,7 @@ const Footer = () => {
       <FooterContent>
         <FirstSection>
           <LogoSection>
-            <Logo src={logoImage} alt="POS Logo" />
+            <Logo src={logoImage} alt="OnePot Kitchen Logo" />
           </LogoSection>
           
           <NavigationSection>
@@ -173,12 +173,12 @@ const Footer = () => {
                 <NavItem><NavLink href="#">Terms of Service</NavLink></NavItem>
               </NavList>
             </NavGroup>
-            
+        
             <NavGroup>
               <NavTitle>Services</NavTitle>
               <NavList>
-                <NavItem><NavLink href="#">Restaurant POS</NavLink></NavItem>
-                <NavItem><NavLink href="#">Retail POS</NavLink></NavItem>
+                <NavItem><NavLink href="#">Restaurant Kitchen</NavLink></NavItem>
+                <NavItem><NavLink href="#">Retail Kitchen</NavLink></NavItem>
                 <NavItem><NavLink href="#">Online Ordering</NavLink></NavItem>
                 <NavItem><NavLink href="#">Analytics</NavLink></NavItem>
               </NavList>
@@ -200,7 +200,7 @@ const Footer = () => {
         
         <ThirdSection>
           <Copyright>
-            © 2024 POS System. All rights reserved.
+            © 2025 OnePot Kitchen. All rights reserved.
           </Copyright>
           
           <SocialLinks>

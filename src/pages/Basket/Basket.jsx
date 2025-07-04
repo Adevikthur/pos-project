@@ -63,7 +63,7 @@ const BasketLayout = styled.div`
 const BasketSection = styled.div`
   flex: 1;
   width: 100%;
-
+  
 `;
 
 const SummarySection = styled.div`
@@ -83,7 +83,7 @@ const SectionTitle = styled.h2`
   
   @media (min-width: 768px) {
     font-size: 20px;
-    margin: 0 0 16px 0;
+  margin: 0 0 16px 0;
   }
 `;
 
@@ -95,9 +95,9 @@ const BasketItemsContainer = styled.div`
   margin-bottom: 24px;
   
   @media (min-width: 768px) {
-    gap: 16px;
+  gap: 16px;
     width: 600px;
-    margin-bottom: 32px;
+  margin-bottom: 32px;
   }
 `;
 
@@ -138,7 +138,7 @@ const SpecialInstructionsContainer = styled.div`
   
   @media (min-width: 768px) {
     gap: 8px;
-    padding: 24px;
+  padding: 24px;
   }
 `;
 
@@ -262,7 +262,7 @@ const Basket = ({
             <MainContentGroup>
               <PageTitle>Your Basket</PageTitle>
               
-              <BasketSection>
+            <BasketSection>
               <SectionTitle>Order Items</SectionTitle>
               
               <BasketItemsContainer>

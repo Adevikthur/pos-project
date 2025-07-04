@@ -1,4 +1,6 @@
 import FoodCard from './FoodCard';
+import { foodCardVariants, foodCardStates, foodCardConfigs } from '../../stories/shared/foodCardVariants';
+import { composeStories, createResponsiveStories, createInteractiveStories } from '../../stories/shared/composeStories';
 
 export default {
   title: 'Components/FoodCard',
@@ -11,77 +13,63 @@ export default {
   },
 };
 
-const mockFoods = {
-  pizza: {
-    id: '1',
-    name: 'Margherita Pizza',
-    description: 'Fresh mozzarella, tomato sauce, and basil on our signature crust',
-    price: 14.99,
-    emoji: '🍕',
-    badge: 'Vegetarian',
-  },
-  burger: {
-    id: '2',
-    name: 'Classic Cheeseburger',
-    description: 'Juicy beef patty with melted cheese, lettuce, tomato, and special sauce',
-    price: 12.99,
-    emoji: '🍔',
-  },
-  pasta: {
-    id: '3',
-    name: 'Spaghetti Carbonara',
-    description: 'Al dente pasta with creamy sauce, pancetta, and parmesan cheese',
-    price: 16.99,
-    emoji: '🍝',
-  },
-  salad: {
-    id: '4',
-    name: 'Caesar Salad',
-    description: 'Crisp romaine lettuce with parmesan cheese, croutons, and caesar dressing',
-    price: 9.99,
-    emoji: '🥗',
-    badge: 'Vegetarian',
-  },
-  longName: {
-    id: '5',
-    name: 'Super Deluxe Ultimate Supreme Pizza with Extra Everything and Premium Toppings',
-    description: 'This is a very long description that should be truncated to show how the card handles overflow text in both the title and description areas',
-    price: 29.99,
-    emoji: '🍕',
-    badge: 'Premium',
+// Base story template
+const baseStory = {
+  args: {
+    food: foodCardVariants.pizza,
   },
 };
 
+// Individual food card stories using shared variants
 export const Pizza = {
   args: {
-    food: mockFoods.pizza,
+    food: foodCardVariants.pizza,
   },
 };
 
 export const Burger = {
   args: {
-    food: mockFoods.burger,
+    food: foodCardVariants.burger,
   },
 };
 
 export const Pasta = {
   args: {
-    food: mockFoods.pasta,
+    food: foodCardVariants.pasta,
   },
 };
 
-export const VegetarianSalad = {
+export const Salad = {
   args: {
-    food: mockFoods.salad,
+    food: foodCardVariants.salad,
   },
 };
 
+export const Drink = {
+  args: {
+    food: foodCardVariants.drink,
+  },
+};
+
+export const Dessert = {
+  args: {
+    food: foodCardVariants.dessert,
+  },
+};
+
+// Long name variant for testing text overflow
 export const LongName = {
   args: {
-    food: mockFoods.longName,
+    food: {
+      ...foodCardVariants.pizza,
+      name: 'Super Deluxe Ultimate Supreme Pizza with Extra Everything and Premium Toppings',
+      description: 'This is a very long description that should be truncated to show how the card handles overflow text in both the title and description areas',
+      price: 29.99,
+    },
   },
 };
 
+// Multiple cards showcase
 export const MultipleCards = {
   render: () => (
     <div style={{ 
@@ -90,10 +78,12 @@ export const MultipleCards = {
       gap: '20px',
       maxWidth: '900px'
     }}>
-      <FoodCard food={mockFoods.pizza} />
-      <FoodCard food={mockFoods.burger} />
-      <FoodCard food={mockFoods.pasta} />
-      <FoodCard food={mockFoods.salad} />
+      <FoodCard food={foodCardVariants.pizza} />
+      <FoodCard food={foodCardVariants.burger} />
+      <FoodCard food={foodCardVariants.pasta} />
+      <FoodCard food={foodCardVariants.salad} />
+      <FoodCard food={foodCardVariants.drink} />
+      <FoodCard food={foodCardVariants.dessert} />
     </div>
   ),
   parameters: {
@@ -101,9 +91,10 @@ export const MultipleCards = {
   },
 };
 
+// Responsive stories
 export const Mobile = {
   args: {
-    food: mockFoods.pizza,
+    food: foodCardVariants.pizza,
   },
   parameters: {
     viewport: {
@@ -114,7 +105,7 @@ export const Mobile = {
 
 export const Tablet = {
   args: {
-    food: mockFoods.pizza,
+    food: foodCardVariants.pizza,
   },
   parameters: {
     viewport: {
@@ -125,11 +116,93 @@ export const Tablet = {
 
 export const Desktop = {
   args: {
-    food: mockFoods.pizza,
+    food: foodCardVariants.pizza,
   },
   parameters: {
     viewport: {
       defaultViewport: 'desktop',
+    },
+  },
+};
+
+// Interactive stories with actions
+export const InteractiveCards = {
+  render: () => (
+    <div style={{ 
+      display: 'grid', 
+      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+      gap: '20px',
+      maxWidth: '900px'
+    }}>
+      <FoodCard 
+        food={foodCardVariants.pizza} 
+        onClick={() => console.log('Pizza clicked')}
+      />
+      <FoodCard 
+        food={foodCardVariants.burger} 
+        onClick={() => console.log('Burger clicked')}
+      />
+      <FoodCard 
+        food={foodCardVariants.pasta} 
+        onClick={() => console.log('Pasta clicked')}
+      />
+    </div>
+  ),
+  parameters: {
+    layout: 'padded',
+  },
+};
+
+// Compose stories using the utility functions
+export const ComposedVariants = {
+  ...composeStories(baseStory, foodCardVariants),
+};
+
+// Create responsive versions of all variants
+export const ResponsiveVariants = {
+  ...createResponsiveStories(baseStory, foodCardVariants),
+};
+
+// Create interactive versions with actions
+export const InteractiveVariants = {
+  ...createInteractiveStories(baseStory, foodCardVariants, {
+    onClick: () => console.log('Food card clicked'),
+  }),
+};
+
+// State-based stories
+export const OutOfStock = {
+  args: {
+    food: {
+      ...foodCardVariants.pizza,
+      ...foodCardStates.outOfStock,
+    },
+  },
+};
+
+export const Popular = {
+  args: {
+    food: {
+      ...foodCardVariants.burger,
+      ...foodCardStates.popular,
+    },
+  },
+};
+
+export const New = {
+  args: {
+    food: {
+      ...foodCardVariants.pasta,
+      ...foodCardStates.new,
+    },
+  },
+};
+
+export const Discounted = {
+  args: {
+    food: {
+      ...foodCardVariants.salad,
+      ...foodCardStates.discounted,
     },
   },
 }; 

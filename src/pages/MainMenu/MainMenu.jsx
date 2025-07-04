@@ -422,7 +422,7 @@ const MainMenu = ({ basketItems = [], onAddToBasket, onBasketClick, onLogoClick 
                   }
                 </p>
               </NoResults>
-            )}
+          )}
           </FoodSection>
         </ContentWrapper>
       </MainContent>
@@ -458,7 +458,7 @@ const MainMenu = ({ basketItems = [], onAddToBasket, onBasketClick, onLogoClick 
                 </PlusButton>
               </QuantityContainer>
             </QuantitySection>
-            
+        
                         {selectedFood.containsGluten && <SectionDivider />}
             
             {/* Gluten Free Section - Only show for foods that contain gluten */}

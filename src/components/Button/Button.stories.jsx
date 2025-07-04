@@ -1,4 +1,6 @@
 import Button from './Button';
+import { buttonVariants, buttonConfigs, buttonStates } from '../../stories/shared/buttonVariants';
+import { composeStories, createResponsiveStories, createInteractiveStories } from '../../stories/shared/composeStories';
 
 export default {
   title: 'Components/Button',
@@ -19,68 +21,59 @@ export default {
   },
 };
 
-export const Primary = {
+// Base story template
+const baseStory = {
   args: {
-    children: 'Primary Button',
+    children: 'Button',
     variant: 'primary',
+    size: 'medium',
   },
+};
+
+// Compose stories from shared variants
+export const Primary = {
+  args: buttonVariants.primary,
 };
 
 export const Secondary = {
-  args: {
-    children: 'Secondary Button',
-    variant: 'secondary',
-  },
+  args: buttonVariants.secondary,
 };
 
 export const Small = {
-  args: {
-    children: 'Small Button',
-    size: 'small',
-  },
+  args: buttonVariants.small,
 };
 
 export const Large = {
-  args: {
-    children: 'Large Button',
-    size: 'large',
-  },
+  args: buttonVariants.large,
 };
 
 export const FullWidth = {
-  args: {
-    children: 'Full Width Button',
-    fullWidth: true,
-  },
+  args: buttonVariants.fullWidth,
   parameters: {
     layout: 'padded',
   },
 };
 
 export const Disabled = {
-  args: {
-    children: 'Disabled Button',
-    disabled: true,
-  },
+  args: buttonVariants.disabled,
 };
 
+// Compose all button variants using the utility
 export const AllVariants = {
   render: () => (
     <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-      <Button variant="primary">Primary</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="primary" size="small">Small</Button>
-      <Button variant="primary" size="large">Large</Button>
-      <Button variant="primary" disabled>Disabled</Button>
+      <Button {...buttonVariants.primary}>Primary</Button>
+      <Button {...buttonVariants.secondary}>Secondary</Button>
+      <Button {...buttonVariants.small}>Small</Button>
+      <Button {...buttonVariants.large}>Large</Button>
+      <Button {...buttonVariants.disabled}>Disabled</Button>
     </div>
   ),
 };
 
+// Responsive stories
 export const Mobile = {
-  args: {
-    children: 'Mobile Button',
-    fullWidth: true,
-  },
+  args: buttonVariants.mobile,
   parameters: {
     viewport: {
       defaultViewport: 'mobile1',
@@ -89,12 +82,44 @@ export const Mobile = {
 };
 
 export const Desktop = {
-  args: {
-    children: 'Desktop Button',
-  },
+  args: buttonVariants.desktop,
   parameters: {
     viewport: {
       defaultViewport: 'desktop',
     },
   },
+};
+
+// Interactive stories with actions
+export const InteractiveButtons = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+      <Button {...buttonVariants.primary} onClick={() => console.log('Primary clicked')}>
+        Primary
+      </Button>
+      <Button {...buttonVariants.secondary} onClick={() => console.log('Secondary clicked')}>
+        Secondary
+      </Button>
+      <Button {...buttonVariants.disabled} onClick={() => console.log('Disabled clicked')}>
+        Disabled
+      </Button>
+    </div>
+  ),
+};
+
+// Compose stories using the utility functions
+export const ComposedVariants = {
+  ...composeStories(baseStory, buttonVariants),
+};
+
+// Create responsive versions of all variants
+export const ResponsiveVariants = {
+  ...createResponsiveStories(baseStory, buttonVariants),
+};
+
+// Create interactive versions with actions
+export const InteractiveVariants = {
+  ...createInteractiveStories(baseStory, buttonVariants, {
+    onClick: () => console.log('Button clicked'),
+  }),
 }; 

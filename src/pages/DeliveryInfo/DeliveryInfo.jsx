@@ -190,7 +190,7 @@ const PaymentMethodContainer = styled.div`
   
   @media (min-width: 768px) {
     flex-direction: row;
-    gap: 16px;
+  gap: 16px;
   }
 `;
 
@@ -551,7 +551,7 @@ const DeliveryInfo = ({
           <DeliveryLayout>
             <MainContentGroup>
               <PageTitle>Delivery Information</PageTitle>
-              
+                  
               <DeliverySection>
               <FormContainer>
                 <AddressContainer>

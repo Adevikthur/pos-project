@@ -254,10 +254,10 @@ const OverlayModal = ({
         </CloseButton>
         
         <ModalScrollContainer>
-          {food && (
+        {food && (
             <>
               <FoodImageContainer>
-                {food.image ? (
+              {food.image ? (
                   <img src={food.image} alt={food.name} />
                 ) : (
                   <div style={{ 
@@ -269,13 +269,13 @@ const OverlayModal = ({
                   }}>
                     {food.emoji || '🍕'}
                   </div>
-                )}
+              )}
               </FoodImageContainer>
               
               <FoodInfoContainer>
-                <FoodTitle>{food.name}</FoodTitle>
-                <FoodDescription>{food.description}</FoodDescription>
-                <FoodPrice>${food.price.toFixed(2)}</FoodPrice>
+            <FoodTitle>{food.name}</FoodTitle>
+            <FoodDescription>{food.description}</FoodDescription>
+            <FoodPrice>${food.price.toFixed(2)}</FoodPrice>
                 
                 {children}
               </FoodInfoContainer>

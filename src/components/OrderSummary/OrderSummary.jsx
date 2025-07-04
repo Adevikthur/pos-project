@@ -205,8 +205,8 @@ const EmptyIcon = styled.div`
   margin-bottom: 12px;
   
   @media (min-width: 768px) {
-    font-size: 48px;
-    margin-bottom: 16px;
+  font-size: 48px;
+  margin-bottom: 16px;
   }
 `;
 
@@ -284,7 +284,7 @@ const OrderSummary = ({
             <PricingLabel>Subtotal</PricingLabel>
             <PricingValue>${subtotal.toFixed(2)}</PricingValue>
           </PricingRow>
-          
+      
           <PricingRow>
             <PricingLabel>Delivery</PricingLabel>
             <PricingValue>${displayDeliveryFee.toFixed(2)}</PricingValue>
@@ -302,12 +302,12 @@ const OrderSummary = ({
         </PricingItems>
         
         <Divider />
-        
-        <TotalRow>
-          <TotalLabel>Total</TotalLabel>
-          <TotalValue>${displayTotal.toFixed(2)}</TotalValue>
-        </TotalRow>
-        
+      
+      <TotalRow>
+        <TotalLabel>Total</TotalLabel>
+        <TotalValue>${displayTotal.toFixed(2)}</TotalValue>
+      </TotalRow>
+      
         {onCheckout && (
           <CheckoutButton 
             onClick={onCheckout}
@@ -316,7 +316,7 @@ const OrderSummary = ({
             <ButtonIcon src={creditCardIcon} alt="Checkout" />
             {checkoutButtonText}
           </CheckoutButton>
-        )}
+      )}
       </PricingGroup>
     </SummaryContainer>
   );
