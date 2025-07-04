@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import logoImage from '/one-pot-main.svg';
+import logoImage from '/onepot-logo-red.svg'
 
 const FooterContainer = styled.footer`
   background-color: #F3F5F5;
@@ -36,13 +36,13 @@ const LogoSection = styled.div`
   flex-shrink: 0;
   
   @media (min-width: 768px) {
-    max-width: 200px;
+    max-width:200px;
   }
 `;
 
 const Logo = styled.img`
-  width: 154px;
-  height: 56px;
+  width:200px;
+  height: 70px;
   filter: brightness(0) saturate(100%) invert(76%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(76%) contrast(76%);
   margin-bottom: 16px;
 `;
